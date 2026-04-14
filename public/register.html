@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Регистрация — GULREZ</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/auth.css">
+</head>
+<body class="register-page">
+
+
+
+<div class="auth-card">
+
+
+  <h1 class="auth-title">Создать аккаунт</h1>
+  <p class="auth-sub">Присоединяйтесь — для вас всегда свежие цветы</p>
+
+  <div class="auth-error" id="authError"></div>
+
+  <form id="registerForm" novalidate>
+
+    <div class="auth-field">
+      <label class="auth-label">Логин</label>
+      <div class="auth-input-wrap">
+        <svg class="auth-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+        <input class="auth-input" id="regLogin" type="text" placeholder="Придумайте логин" autocomplete="username">
+      </div>
+    </div>
+
+    <div class="auth-field">
+      <label class="auth-label">Номер телефона</label>
+      <div class="auth-input-wrap auth-phone-wrap">
+        <span class="auth-phone-prefix">+992</span>
+        <input class="auth-input auth-phone-input" id="regPhone" type="tel" inputmode="numeric"
+               placeholder="XX XXX XX XX" autocomplete="tel">
+      </div>
+     
+    </div>
+
+    <div class="auth-field">
+      <label class="auth-label">Пароль</label>
+      <div class="auth-input-wrap">
+        <svg class="auth-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        <input class="auth-input" id="regPassword" type="password" placeholder="Минимум 6 символов" autocomplete="new-password">
+        <button type="button" class="auth-eye" onclick="toggleEye('regPassword',this)" aria-label="Показать пароль">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" width="18" height="18"><path d="M1 12S5 4 12 4s11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <div class="auth-field">
+      <label class="auth-label">Повторите пароль</label>
+      <div class="auth-input-wrap">
+        <svg class="auth-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        <input class="auth-input" id="regPassword2" type="password" placeholder="Повторите пароль" autocomplete="new-password">
+        <button type="button" class="auth-eye" onclick="toggleEye('regPassword2',this)" aria-label="Показать пароль">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" width="18" height="18"><path d="M1 12S5 4 12 4s11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <button class="auth-btn" id="regBtn" type="submit">Зарегистрироваться</button>
+  </form>
+
+  <p class="auth-switch">Уже есть аккаунт? <a href="/login.html">Войти</a></p>
+
+</div>
+
+<script>
+  // ── Phone input: digits only, max 9, auto-format
+  const phoneInput = document.getElementById('regPhone');
+  phoneInput.addEventListener('input', function() {
+    const raw = this.value.replace(/\D/g, '').slice(0, 9);
+    if      (raw.length > 7) this.value = raw.slice(0,2)+' '+raw.slice(2,5)+' '+raw.slice(5,7)+' '+raw.slice(7);
+    else if (raw.length > 5) this.value = raw.slice(0,2)+' '+raw.slice(2,5)+' '+raw.slice(5);
+    else if (raw.length > 2) this.value = raw.slice(0,2)+' '+raw.slice(2);
+    else                     this.value = raw;
+  });
+  function phoneDigits() { return phoneInput.value.replace(/\D/g,''); }
+
+  // ── Toggle password visibility
+  function toggleEye(id, btn) {
+    const inp = document.getElementById(id);
+    const show = inp.type === 'password';
+    inp.type = show ? 'text' : 'password';
+    btn.innerHTML = show
+      ? `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" width="18" height="18"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/></svg>`
+      : `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" width="18" height="18"><path d="M1 12S5 4 12 4s11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg>`;
+  }
+
+  // ── Error display
+  function showError(msg) {
+    const el = document.getElementById('authError');
+    el.textContent = msg;
+    el.classList.add('visible');
+    el.scrollIntoView({ behavior:'smooth', block:'nearest' });
+  }
+
+  // ── Submit
+  document.getElementById('registerForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    document.getElementById('authError').classList.remove('visible');
+
+    const login    = document.getElementById('regLogin').value.trim();
+    const digits   = phoneDigits();
+    const password = document.getElementById('regPassword').value;
+    const password2 = document.getElementById('regPassword2').value;
+
+    if (!login)               return showError('Введите логин');
+    if (login.length < 3)     return showError('Логин — минимум 3 символа');
+    if (digits.length !== 9)  return showError('Введите ровно 9 цифр номера телефона');
+    if (!password)            return showError('Введите пароль');
+    if (password.length < 6)  return showError('Пароль — минимум 6 символов');
+    if (password !== password2) return showError('Пароли не совпадают');
+
+    const btn = document.getElementById('regBtn');
+    btn.disabled = true;
+    btn.textContent = 'Создание аккаунта...';
+
+    try {
+      const res  = await fetch('/register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ login, phone: digits, password })
+      });
+      const data = await res.json();
+      if (res.ok && data.ok) {
+        window.location.href = '/';
+      } else {
+        showError(data.error || 'Ошибка регистрации');
+      }
+    } catch {
+      showError('Ошибка сети. Попробуйте ещё раз.');
+    } finally {
+      btn.disabled = false;
+      btn.textContent = 'Зарегистрироваться';
+    }
+  });
+</script>
+</body>
+</html>

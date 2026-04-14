@@ -1,0 +1,1842 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GULREZ — Цветочный магазин</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pinyon+Script&family=Marck+Script&family=Philosopher:ital,wght@1,400&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- ─── PRELOADER ─── -->
+<div id="preloader">
+  <!-- Floating petals -->
+  <div class="preloader-petals">
+    <div class="petal"></div>
+    <div class="petal"></div>
+    <div class="petal"></div>
+    <div class="petal"></div>
+    <div class="petal"></div>
+    <div class="petal"></div>
+    <div class="petal"></div>
+    <div class="petal"></div>
+  </div>
+
+  <div class="preloader-logo">
+    <!-- Soft glow ring -->
+    <div class="preloader-ring"></div>
+
+    <!-- Logo image -->
+    <img class="preloader-flower" src="images/logo.png" alt="GULREZ">
+
+    <!-- Decorative divider with dot -->
+    <div class="preloader-divider">
+      <div class="preloader-divider-line"></div>
+      <div class="preloader-divider-dot"></div>
+      <div class="preloader-divider-line"></div>
+    </div>
+
+    <!-- Tagline -->
+    <p class="preloader-sub" data-i18n="preloader-sub">Цветочный магазин · Пенджикент</p>
+
+    <!-- Progress bar -->
+    <div class="preloader-progress">
+      <div class="preloader-progress-bar"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ─── MOBILE NAV DROPDOWN ─── -->
+<div class="mobile-nav" id="mobileNav">
+  <div class="mobile-nav-items">
+    <a href="#" onclick="closeMobileNav()">
+      <span class="nav-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></span>
+      <span data-i18n="m-nav-home">Главная</span>
+    </a>
+    <a href="#catalog" onclick="closeMobileNav()">
+      <span class="nav-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg></span>
+      <span data-i18n="m-nav-catalog">Каталог</span>
+    </a>
+    <a href="#about" onclick="closeMobileNav()">
+      <span class="nav-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg></span>
+      <span data-i18n="m-nav-about">О нас</span>
+    </a>
+    <a href="#reviews" onclick="closeMobileNav()">
+      <span class="nav-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></span>
+      <span>Отзывы</span>
+    </a>
+    <a href="#footer" onclick="closeMobileNav()">
+      <span class="nav-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2A19.79 19.79 0 0 1 11.69 19a19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 3.1 4.18 2 2 0 0 1 5.08 2h3a2 2 0 0 1 2 1.72c.13 1 .37 1.97.7 2.91a2 2 0 0 1-.45 2.11L9.09 9.91a16 16 0 0 0 6 6l1.17-1.17a2 2 0 0 1 2.11-.45c.94.33 1.91.57 2.91.7A2 2 0 0 1 23 16.92z"/></svg></span>
+      <span data-i18n="m-nav-contacts">Контакты</span>
+    </a>
+  </div>
+
+  <div class="mobile-nav-divider"></div>
+
+  <div class="mobile-nav-bottom">
+    <div class="lang-select-menu">
+      <button class="lang-btn active" onclick="setLang('RU',this)">RU</button>
+      <button class="lang-btn" onclick="setLang('TJ',this)">TJ</button>
+      <button class="lang-btn" onclick="setLang('EN',this)">EN</button>
+    </div>
+    <div id="mobileAuthBtnWrap">
+      <a class="mobile-login-btn" id="mobileAuthBtn" href="login.html" data-i18n="m-nav-login">Войти</a>
+    </div>
+  </div>
+</div>
+
+<!-- ─── TICKER ─── -->
+<div class="ticker-bar">
+  <div class="ticker-inner">
+    <span class="ticker-item"><span class="ticker-icon"></span> Свежие букеты</span>
+    <span class="ticker-dot"></span>
+    <span class="ticker-item"><span class="ticker-icon"></span> 08:00 — 22:00</span>
+    <span class="ticker-dot"></span>
+    <span class="ticker-item"><span class="ticker-icon"></span> Красиво</span>
+    <span class="ticker-dot"></span>
+    <span class="ticker-item"><span class="ticker-icon"></span> Аккуратно</span>
+    <span class="ticker-dot"></span>
+    <span class="ticker-item"><span class="ticker-icon"></span> Вовремя</span>
+    <span class="ticker-dot"></span>
+    <span class="ticker-item"><span class="ticker-icon"></span> Пенджикент, Таджикистан</span>
+    <span class="ticker-dot"></span>
+    <span class="ticker-item"><span class="ticker-icon"></span> Доставка — 10 TJS</span>
+    <span class="ticker-dot"></span>
+    <span class="ticker-item"><span class="ticker-icon"></span> Свежие букеты</span>
+    <span class="ticker-dot"></span>
+    <span class="ticker-item"><span class="ticker-icon"></span> 08:00 — 22:00</span>
+    <span class="ticker-dot"></span>
+    <span class="ticker-item"><span class="ticker-icon"></span> Красиво</span>
+    <span class="ticker-dot"></span>    
+    <span class="ticker-item"><span class="ticker-icon"></span> Аккуратно</span>
+    <span class="ticker-dot"></span>
+    <span class="ticker-item"><span class="ticker-icon"></span> Вовремя</span>
+    <span class="ticker-dot"></span>
+    <span class="ticker-item"><span class="ticker-icon"></span> Пенджикент, Таджикистан</span>
+    <span class="ticker-dot"></span>
+     <span class="ticker-item"><span class="ticker-icon"></span> Доставка — 10 TJS</span>
+    <span class="ticker-dot"></span>
+  </div>
+</div>
+
+<!-- ─── HEADER ─── -->
+<header id="header">
+  <a href="#" class="logo">
+    <img src="images/logo.png" alt="Gulrez — Цветочный магазин">
+  </a>
+
+  <nav>
+    <a href="#" data-i18n="nav-home">Главная</a>
+    <a href="#catalog" data-i18n="nav-catalog">Каталог</a>
+    <a href="#about" data-i18n="nav-about">О нас</a>
+    <a href="#reviews">Отзывы</a>
+    <a href="#footer" data-i18n="nav-contacts">Контакты</a>
+  </nav>
+
+  <div class="header-actions">
+    <!-- Search -->
+    <button class="icon-btn" title="Поиск" onclick="openSearch()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="11" cy="11" r="8"/>
+        <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+      </svg>
+    </button>
+
+    <!-- Favourite -->
+    <button class="icon-btn" id="wishlistBtn" title="Избранное" onclick="openWishlist()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+      </svg>
+      <span class="wishlist-badge" id="wishlistBadge" style="display:none">0</span>
+    </button>
+
+    <!-- Cart -->
+    <button class="icon-btn" title="Корзина" onclick="openCart()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
+        <line x1="3" y1="6" x2="21" y2="6"/>
+        <path d="M16 10a4 4 0 0 1-8 0"/>
+      </svg>
+      <span class="cart-badge" id="cartBadge">0</span>
+    </button>
+
+    <div id="authBtnWrap">
+      <a class="btn-login" id="authBtn" data-i18n="nav-login" href="login.html">Войти</a>
+    </div>
+
+    <button class="burger" onclick="openMobileNav()">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<!-- ─── HERO ─── -->
+<section class="hero" id="hero">
+  <div class="slides-wrapper">
+    <div class="slide slide-1 active"></div>
+    <div class="slide slide-2"></div>
+    <div class="slide slide-3"></div>
+    <div class="slide slide-4"></div>
+  </div>
+
+  <div class="hero-content">
+    <div class="hero-content-top">
+      <span class="hero-eyebrow" data-i18n="hero-eyebrow">Цветочный магазин Gulrez · Пенджикент</span>
+      <h1 class="hero-quote visible" id="heroQuote">
+        Если любовь заставляет тебя расцветать — не сомневайся, это настоящее
+      </h1>
+      <p class="hero-sub visible" data-i18n="hero-sub">Авторские букеты с доставкой в день заказа</p>
+    </div>
+    <div class="hero-cta visible">
+      <a href="#catalog" class="btn-primary" data-i18n="hero-cta">Смотреть каталог</a>
+    </div>
+  </div>
+
+  <div class="slide-dots" id="slideDots">
+    <button class="dot active" onclick="goToSlide(0)"></button>
+    <button class="dot" onclick="goToSlide(1)"></button>
+    <button class="dot" onclick="goToSlide(2)"></button>
+    <button class="dot" onclick="goToSlide(3)"></button>
+  </div>
+
+  <div class="scroll-hint" data-i18n="hero-scroll">Прокрути</div>
+</section>
+
+<!-- ─── CATALOG ─── -->
+<section class="catalog" id="catalog">
+  <div class="section-header fade-up">
+    <div>
+      <span class="section-label" data-i18n="catalog-label">Каталог</span>
+      <h2 class="section-title" data-i18n="catalog-title">Популярные букеты</h2>
+      <p class="section-desc" data-i18n="catalog-desc">Свежие цветы каждый день — от нежных пастелей до ярких акцентов для любого повода.</p>
+    </div>
+    <a href="#" class="btn-primary" style="align-self:flex-end" data-i18n="catalog-view-all">Весь каталог</a>
+  </div>
+
+  <div class="products-grid" id="productsGrid">
+    <!-- Products rendered dynamically via loadCatalog() in script.js -->
+    <div class="catalog-loading" id="catalogLoading"><div class="catalog-spinner"></div></div>
+  </div>
+</section>
+
+<!-- ─── ABOUT ─── -->
+<section class="about" id="about">
+  <div class="about-inner">
+
+    <div class="about-left fade-up">
+      <span class="section-label" data-i18n="about-label">О нас</span>
+      <h2 class="section-title" data-i18n="about-title">Живая красота — каждый день</h2>
+      <div class="about-text">
+        <p data-i18n="about-text-0">Мы верим, что цветы — это не просто подарок, а язык самых глубоких чувств. Каждый букет создаётся руками наших флористов с трепетом и вниманием к деталям.</p>
+        <p data-i18n="about-text-1">Работаем только со свежими цветами — поставки напрямую с лучших ферм. Гарантируем свежесть каждого букета.</p>
+        <p data-i18n="about-text-2">Студия Gulrez в Пенджикенте. Пишите в Direct или WhatsApp — ответим быстро!</p>
+      </div>
+      <div class="about-stat-row">
+        <div class="about-stat">
+          <span>5+</span>
+          <label data-i18n="stat-1-label">лет в деле</label>
+        </div>
+        <div class="about-stat">
+          <span>2400</span>
+          <label data-i18n="stat-2-label">счастливых клиентов</label>
+        </div>
+        <div class="about-stat">
+          <span>100%</span>
+          <label data-i18n="stat-3-label">свежесть</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="about-gallery fade-up" style="transition-delay:0.15s">
+      <div class="about-img">
+        <img src="images/30.jpg" alt="Флористическая студия" loading="lazy">
+      </div>
+      <div class="about-img">
+        <img src="images/31.jpg" alt="Работа флориста" loading="lazy">
+      </div>
+      <div class="about-img">
+        <img src="images/32.jpg" alt="Цветочный магазин" loading="lazy">
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ─── DELIVERY & PAYMENT ─── -->
+<section class="delivery-section" id="delivery">
+
+  <span class="delivery-eyebrow" data-i18n="delivery-eyebrow">Доставка и оплата</span>
+  <h2 class="delivery-title" data-i18n="delivery-title">Как заказать и оплатить</h2>
+  <div class="delivery-title-line"></div>
+  <p class="delivery-subtitle" data-i18n="delivery-subtitle">Быстрая доставка по Пенджикенту и удобные способы оплаты для вашего комфорта.</p>
+
+  <div class="delivery-cards">
+
+    <!-- Delivery card -->
+    <div class="delivery-card fade-up">
+      <div class="delivery-card-title" data-i18n="delivery-card-title">Доставка</div>
+      <span class="delivery-card-sub" data-i18n="delivery-card-sub">Ежедневно с 08:00 до 22:00</span>
+      <ul class="delivery-list">
+        <li><span class="delivery-check">✓</span> <span data-i18n="delivery-li-0">Доставка по Пенджикенту — 10 TJS</span></li>
+        <li><span class="delivery-check">✓</span> <span data-i18n="delivery-li-1">Доставка в день заказа</span></li>
+        <li><span class="delivery-check">✓</span> <span data-i18n="delivery-li-2">Заказы принимаются по телефону или через соцсети</span></li>
+        <li><span class="delivery-check">✓</span> <span data-i18n="delivery-li-3">Самовывоз из магазина — бесплатно</span></li>
+      </ul>
+      <div class="delivery-card-footer">
+        <a href="https://wa.me/992000000000" class="btn-delivery" target="_blank" data-i18n="delivery-btn">Заказать доставку</a>
+        <span class="delivery-stamp" data-i18n="delivery-stamp">Быстро и удобно</span>
+      </div>
+    </div>
+
+    <!-- Payment card -->
+    <div class="delivery-card fade-up" style="transition-delay:0.12s">
+      <div class="delivery-card-title" data-i18n="payment-card-title">Оплата</div>
+      <span class="delivery-card-sub" data-i18n="payment-card-sub">Удобные способы оплаты</span>
+      <ul class="delivery-list">
+        <li><span class="delivery-check">✓</span> <span data-i18n="payment-li-0">Оплата через Алиф</span></li>
+        <li><span class="delivery-check">✓</span> <span data-i18n="payment-li-1">Оплата через Душанбе Сити</span></li>
+        <li><span class="delivery-check">✓</span> <span data-i18n="payment-li-2">Наличными при получении</span></li>
+        <li><span class="delivery-check">✓</span> <span data-i18n="payment-li-3">Перевод на карту</span></li>
+      </ul>
+      <div class="delivery-card-footer">
+        <a href="https://wa.me/992000000000" class="btn-delivery" target="_blank" data-i18n="payment-btn">Написать нам</a>
+        <span class="delivery-stamp" data-i18n="payment-stamp">Всегда на связи</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ─── REVIEWS ─── -->
+<section class="reviews-section" id="reviews">
+
+  <!-- Header -->
+  <div class="reviews-header fade-up">
+    <div class="reviews-header-left">
+      <span class="section-label">Отзывы</span>
+      <h2 class="section-title">Что говорят наши клиенты</h2>
+      <p class="section-desc">Честные впечатления тех, кто уже получил букет от Gulrez</p>
+    </div>
+    <!-- Overall rating -->
+    <div class="reviews-overall fade-up" id="reviewsOverall" style="transition-delay:0.1s">
+      <div class="reviews-overall-top">
+        <div class="reviews-overall-score" id="overallScore">—</div>
+        <div class="reviews-overall-right">
+          <div class="reviews-overall-stars" id="overallStars"></div>
+          <div class="reviews-overall-count" id="overallCount">0 отзывов</div>
+        </div>
+      </div>
+      <div class="reviews-overall-divider"></div>
+      <!-- Rating breakdown bars -->
+      <div class="reviews-breakdown" id="reviewsBreakdown"></div>
+    </div>
+  </div>
+
+  <!-- Write review block -->
+  <div class="reviews-write-wrap fade-up" id="reviewsWriteWrap" style="transition-delay:0.15s">
+    <!-- NOT logged in -->
+    <div class="reviews-login-prompt" id="reviewLoginPrompt">
+      <div class="reviews-login-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" width="28" height="28"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+      </div>
+      <p>Войдите в аккаунт, чтобы оставить отзыв</p>
+      <a href="login.html" class="reviews-login-btn">Войти / Зарегистрироваться</a>
+    </div>
+    <!-- Logged in -->
+    <div class="reviews-form-card" id="reviewFormCard" style="display:none">
+      <div class="reviews-form-header">
+        <div class="reviews-form-avatar" id="reviewFormAvatar">U</div>
+        <div>
+          <div class="reviews-form-username" id="reviewFormUsername">Пользователь</div>
+          <div class="reviews-form-sublabel">Ваш отзыв</div>
+        </div>
+      </div>
+      <!-- Star picker -->
+      <div class="star-picker" id="starPicker" role="group" aria-label="Оценка">
+        <button class="star-pick-btn" data-v="1" onclick="pickStar(1)" aria-label="1 звезда">★</button>
+        <button class="star-pick-btn" data-v="2" onclick="pickStar(2)" aria-label="2 звезды">★</button>
+        <button class="star-pick-btn" data-v="3" onclick="pickStar(3)" aria-label="3 звезды">★</button>
+        <button class="star-pick-btn" data-v="4" onclick="pickStar(4)" aria-label="4 звезды">★</button>
+        <button class="star-pick-btn" data-v="5" onclick="pickStar(5)" aria-label="5 звёзд">★</button>
+        <span class="star-pick-label" id="starPickLabel">Выберите оценку</span>
+      </div>
+      <textarea class="review-textarea" id="reviewText"
+        placeholder="Расскажите о вашем букете — это поможет другим сделать выбор…"
+        maxlength="800" oninput="reviewCharCount(this)"></textarea>
+      <!-- Photo previews -->
+      <div class="rv-photo-previews" id="rvPhotoPreviews"></div>
+      <div class="review-form-footer">
+        <span class="review-char-count" id="reviewCharCount">0 / 800</span>
+        <label class="rv-photo-add-btn" title="Добавить фото (до 3)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" width="16" height="16"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+          <input type="file" id="rvPhotoInput" accept="image/*" multiple style="display:none" onchange="rvAddPhotos(this)">
+        </label>
+        <button class="review-submit-btn" id="reviewSubmitBtn" onclick="submitReview()">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" width="15" height="15"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+          Опубликовать
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Controls -->
+  <div class="reviews-controls fade-up" id="reviewsControls" style="transition-delay:0.2s;display:none">
+    <div class="reviews-count-pill" id="reviewsCountPill">0 отзывов</div>
+    <div class="reviews-sort-wrap">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" width="13" height="13"><line x1="3" y1="6" x2="21" y2="6"/><line x1="6" y1="12" x2="18" y2="12"/><line x1="9" y1="18" x2="15" y2="18"/></svg>
+      <select id="reviewsSort" onchange="sortReviews(this.value)">
+        <option value="newest">Сначала новые</option>
+        <option value="top_rated">Высокая оценка</option>
+        <option value="most_liked">Больше лайков</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- Reviews list -->
+  <div class="reviews-list" id="reviewsList">
+    <div class="reviews-loading" id="reviewsLoading">
+      <div class="reviews-spinner"></div>
+      <span>Загружаем отзывы…</span>
+    </div>
+  </div>
+
+  <!-- Empty state -->
+  <div class="reviews-empty" id="reviewsEmpty" style="display:none">
+    <div class="reviews-empty-icon">🌸</div>
+    <p>Пока нет отзывов — будьте первым!</p>
+  </div>
+
+</section>
+
+<!-- ─── FAQ ─── -->
+<section class="faq-section" id="faq">
+  <div class="faq-inner">
+    <div class="faq-header fade-up">
+      <span class="section-label">FAQ</span>
+      <h2 class="faq-title">Часто задаваемые<br>вопросы</h2>
+      <p class="faq-subtitle">Всё что нужно знать о заказе, доставке и уходе за цветами</p>
+    </div>
+
+    <div class="faq-list fade-up" id="faqList">
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="faqToggle(this)">
+          <span class="faq-q-icon">🛍️</span>
+          <span class="faq-q-text">Как оформить и оплатить заказ?</span>
+          <span class="faq-q-arrow">+</span>
+        </button>
+        <div class="faq-a">
+          <div class="faq-a-inner">
+            <p>Оформить заказ можно тремя способами:</p>
+            <ol>
+              <li><b>На сайте</b> — выберите букет, нажмите «В корзину», укажите данные и оформите заказ.</li>
+              <li><b>Через WhatsApp</b> — напишите нам, и мы поможем выбрать букет и оформим заказ вместе.</li>
+              <li><b>В чате поддержки</b> — нажмите кнопку 💬 внизу справа, Малика всегда на связи!</li>
+            </ol>
+            <p>Оплата принимается <b>наличными при получении</b> или <b>переводом на карту</b> до доставки.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="faqToggle(this)">
+          <span class="faq-q-icon">🚗</span>
+          <span class="faq-q-text">Сколько стоит доставка и как быстро привезут?</span>
+          <span class="faq-q-arrow">+</span>
+        </button>
+        <div class="faq-a">
+          <div class="faq-a-inner">
+            <p>Доставка по городу — <b>10 сомони</b>. Курьер привезёт букет <b>в течение 50–90 минут</b> после подтверждения заказа.</p>
+            <ul>
+              <li>Курьер позвонит за 10–15 минут до приезда.</li>
+              <li>Доставка работает <b>ежедневно с 08:00 до 21:00</b>.</li>
+              <li>Срочная доставка за 30 минут — уточняйте наличие по WhatsApp.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="faqToggle(this)">
+          <span class="faq-q-icon">🌷</span>
+          <span class="faq-q-text">Как ухаживать за букетом, чтобы он дольше простоял?</span>
+          <span class="faq-q-arrow">+</span>
+        </button>
+        <div class="faq-a">
+          <div class="faq-a-inner">
+            <p>Простые правила, которые продлят жизнь букета <b>до 10–14 дней</b>:</p>
+            <ul>
+              <li>🔪 Обрежьте стебли под углом 45° острым ножом (не ножницами).</li>
+              <li>💧 Меняйте воду в вазе <b>каждый день</b>, добавьте немного сахара.</li>
+              <li>❄️ Держите вдали от прямых солнечных лучей, батарей и сквозняков.</li>
+              <li>🌡️ Идеальная температура — 16–20°C.</li>
+              <li>🌿 Удаляйте листья, которые касаются воды.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="faqToggle(this)">
+          <span class="faq-q-icon">📅</span>
+          <span class="faq-q-text">За сколько дней нужно делать заказ?</span>
+          <span class="faq-q-arrow">+</span>
+        </button>
+        <div class="faq-a">
+          <div class="faq-a-inner">
+            <p>Мы стараемся выполнять заказы <b>день в день</b> — просто напишите нам!</p>
+            <ul>
+              <li>Стандартный букет из наличия — <b>от 1–2 часов</b>.</li>
+              <li>Индивидуальный букет под заказ — лучше <b>за 1 день</b>.</li>
+              <li>Для свадьбы, корпоратива или крупного мероприятия — <b>за 3–7 дней</b>.</li>
+            </ul>
+            <p>На праздники (8 марта, Новый год) рекомендуем заказывать <b>заранее</b> — спрос очень высокий!</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="faqToggle(this)">
+          <span class="faq-q-icon">💌</span>
+          <span class="faq-q-text">Можно ли добавить открытку или особое пожелание?</span>
+          <span class="faq-q-arrow">+</span>
+        </button>
+        <div class="faq-a">
+          <div class="faq-a-inner">
+            <p>Конечно! 🎁 Открытка с вашим текстом — <b>бесплатно</b>.</p>
+            <ul>
+              <li>Укажите текст пожелания при оформлении заказа или в WhatsApp.</li>
+              <li>Напишем красиво от руки на фирменной открытке GULREZ.</li>
+              <li>Также возможна <b>анонимная доставка</b> — получатель не узнает отправителя.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="faqToggle(this)">
+          <span class="faq-q-icon">🔄</span>
+          <span class="faq-q-text">Что если букет не понравился или завял быстро?</span>
+          <span class="faq-q-arrow">+</span>
+        </button>
+        <div class="faq-a">
+          <div class="faq-a-inner">
+            <p>Ваше удовольствие — наш приоритет. Если что-то пошло не так:</p>
+            <ul>
+              <li>Напишите нам в WhatsApp или чат <b>в течение 24 часов</b> с фото букета.</li>
+              <li>Мы разберёмся и либо <b>заменим букет</b>, либо вернём деньги.</li>
+              <li>Цветы — живой продукт, и мы несём за них полную ответственность.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="faqToggle(this)">
+          <span class="faq-q-icon">🎨</span>
+          <span class="faq-q-text">Можно ли заказать букет по своему дизайну?</span>
+          <span class="faq-q-arrow">+</span>
+        </button>
+        <div class="faq-a">
+          <div class="faq-a-inner">
+            <p>Да, мы делаем <b>букеты на заказ</b> по вашему пожеланию!</p>
+            <ul>
+              <li>Отправьте нам фото-референс или опишите идею в WhatsApp.</li>
+              <li>Укажите предпочтения по цветам, цвету, стилю и бюджету.</li>
+              <li>Наш флорист подберёт лучшие цветы и создаст уникальный букет.</li>
+            </ul>
+            <p>Мы работаем с розами, пионами, лилиями, хризантемами, сухоцветами и экзотикой.</p>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /faq-list -->
+
+    <div class="faq-cta fade-up">
+      <p>Не нашли ответ? Спросите напрямую!</p>
+      <button class="faq-cta-btn" onclick="fcwToggle()">💬 Написать в чат</button>
+    </div>
+
+  </div>
+</section>
+
+<!-- ─── FOOTER ─── -->
+<footer id="footer" style="margin-top: 64px;">
+<div class="footer-inner">
+
+  <div class="footer-grid-main">
+
+    <!-- Col 1: Brand -->
+    <div class="footer-brand">
+      <div class="footer-logo-wrap">
+        <img src="images/logo.png" alt="Gulrez">
+      </div>
+      <p class="footer-brand-desc" data-i18n="footer-brand-desc">Цветочная мастерская в Пенджикенте. Свежие букеты с доставкой — с заботой о каждой детали.</p>
+      <div class="footer-socials">
+        <!-- Instagram -->
+        <a href="https://instagram.com/gulrez" class="footer-social-btn" target="_blank" rel="noopener" title="Instagram">
+          <svg viewBox="0 0 24 24" fill="none">
+            <defs><linearGradient id="igF" x1="0%" y1="100%" x2="100%" y2="0%"><stop offset="0%" stop-color="#f09433"/><stop offset="50%" stop-color="#dc2743"/><stop offset="100%" stop-color="#bc1888"/></linearGradient></defs>
+            <rect x="2" y="2" width="20" height="20" rx="5" stroke="url(#igF)" stroke-width="1.8"/>
+            <circle cx="12" cy="12" r="4" stroke="url(#igF)" stroke-width="1.8"/>
+            <circle cx="17.5" cy="6.5" r="1.2" fill="url(#igF)"/>
+          </svg>
+        </a>
+        <!-- WhatsApp -->
+        <a href="https://wa.me/992000000000" class="footer-social-btn" target="_blank" rel="noopener" title="WhatsApp">
+          <svg viewBox="0 0 24 24" width="18" height="18">
+            <path d="M20.52 3.48A11.93 11.93 0 0 0 12 0C5.37 0 0 5.37 0 12c0 2.11.55 4.17 1.59 5.99L0 24l6.18-1.56A11.94 11.94 0 0 0 12 24c6.63 0 12-5.37 12-12 0-3.2-1.25-6.22-3.48-8.52z" fill="#25D366" opacity="0.2"/>
+            <path d="M17.47 14.38c-.28-.14-1.65-.81-1.91-.9-.26-.1-.44-.14-.63.14-.19.28-.73.9-.89 1.08-.16.18-.33.2-.61.07-.28-.14-1.18-.44-2.25-1.4-.83-.74-1.39-1.65-1.55-1.93-.16-.28-.02-.43.12-.57.13-.12.28-.33.42-.49.14-.16.19-.28.28-.46.1-.18.05-.34-.02-.48-.07-.14-.63-1.52-.86-2.08-.23-.54-.46-.47-.63-.48H8.8c-.18 0-.47.07-.71.33-.24.26-.93.91-.93 2.22s.95 2.58 1.09 2.76c.14.18 1.88 2.87 4.55 4.02.64.27 1.13.44 1.52.56.64.2 1.22.17 1.68.1.51-.08 1.58-.65 1.8-1.27.22-.63.22-1.16.15-1.27-.06-.11-.25-.18-.53-.31z" fill="#25D366"/>
+            <path d="M12 2.04C6.49 2.04 2.04 6.49 2.04 12c0 1.96.54 3.8 1.48 5.38L2.04 22l4.74-1.46A9.92 9.92 0 0 0 12 21.96c5.51 0 9.96-4.45 9.96-9.96S17.51 2.04 12 2.04z" fill="none" stroke="#25D366" stroke-width="1.2"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+
+    <!-- Col 2: Quick links -->
+    <div class="footer-col">
+      <h4 data-i18n="footer-links-title">Быстрые ссылки</h4>
+      <ul>
+        <li><a href="#" class="footer-nav-link" data-i18n="footer-nav-home">Главная</a></li>
+        <li><a href="#catalog" class="footer-nav-link" data-i18n="footer-nav-catalog">Каталог</a></li>
+        <li><a href="#about" class="footer-nav-link" data-i18n="footer-nav-about">О нас</a></li>
+        <li><a href="#footer" class="footer-nav-link" data-i18n="footer-nav-contacts">Контакты</a></li>
+      </ul>
+    </div>
+
+    <!-- Col 3: Hours + Contacts -->
+    <div class="footer-col">
+      <h4 data-i18n="footer-hours-title">Часы работы</h4>
+      <ul>
+        <li>
+          <span class="open-dot"></span>
+          <span data-i18n="footer-hours-value">Ежедневно: 08:00 — 22:00</span>
+        </li>
+        <li>
+          <svg class="footer-contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          <span data-i18n="footer-delivery">Доставка — 10 TJS</span>
+        </li>
+      </ul>
+
+      <h4 style="margin-top:24px;" data-i18n="footer-contacts-title">Контакты</h4>
+      <ul>
+        <li>
+          <svg class="footer-contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          <span data-i18n="footer-address">г. Пенджикент, Таджикистан</span>
+        </li>
+        <li>
+          <svg class="footer-contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2A19.79 19.79 0 0 1 11.69 19a19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 3.1 4.18 2 2 0 0 1 5.08 2h3a2 2 0 0 1 2 1.72c.13 1 .37 1.97.7 2.91a2 2 0 0 1-.45 2.11L9.09 9.91a16 16 0 0 0 6 6l1.17-1.17a2 2 0 0 1 2.11-.45c.94.33 1.91.57 2.91.7A2 2 0 0 1 23 16.92z"/></svg>
+          <a href="tel:+992000000000">+992 ___ ___ ___</a>
+        </li>
+        <li>
+          <svg class="footer-contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+          <a href="https://wa.me/992000000000" target="_blank" rel="noopener">WhatsApp</a>
+        </li>
+      </ul>
+    </div>
+
+  </div>
+
+  <!-- Bottom bar -->
+  <div class="footer-bottom">
+    <span data-i18n="footer-copyright" class="footer-copy-text">
+      &copy; 2026 GULREZ
+      <span class="footer-sep">|</span>
+      <span data-i18n="footer-dev-label">Разработка</span>
+      <a href="https://t.me/xalilov_uc" target="_blank" rel="noopener" class="footer-sino-link">SINO IT</a>
+    </span>
+    <span data-i18n="footer-made-with" class="footer-made">Сделано с ♡</span>
+  </div>
+
+</div>
+</footer>
+
+<!-- Toast -->
+<!-- ─── PRODUCT MODAL ─── -->
+<div class="modal-overlay" id="productModal" onclick="handleModalOverlayClick(event)">
+  <div class="modal-sheet" id="modalSheet">
+    <div class="modal-handle"></div>
+
+    <div class="modal-header">
+      <button class="modal-close" onclick="closeModal()">
+        <svg viewBox="0 0 24 24" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+      <button class="modal-like-btn" id="modalLikeBtn" onclick="toggleModalLike(event)">
+        <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8">
+          <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+        </svg>
+      </button>
+    </div>
+
+    <img class="modal-main-img" id="modalMainImg" src="" alt="">
+
+    <div class="modal-thumbs" id="modalThumbs"></div>
+
+    <div class="modal-content">
+      <span class="modal-tag" id="modalTag">Хит</span>
+      <h2 class="modal-title" id="modalTitle"></h2>
+      <p class="modal-desc" id="modalDesc"></p>
+
+      <div class="modal-info-grid" id="modalInfoGrid"></div>
+
+      <div class="modal-likes-row">
+        <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        <span class="modal-likes-text" id="modalLikes"></span>
+      </div>
+
+      <div class="modal-delivery-row">
+        <div class="modal-delivery-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="22" height="22"><rect x="1" y="3" width="15" height="13" rx="1"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg></div>
+        <div class="modal-delivery-text">
+          <strong data-i18n="modal-delivery-title">Доставка по Пенджикенту</strong>
+          <span data-i18n="modal-delivery-text">Стоимость доставки — 10 TJS · 08:00–22:00</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal-action-bar">
+      <div class="modal-qty">
+        <button class="modal-qty-btn" onclick="changeQty(-1)">−</button>
+        <span class="modal-qty-num" id="modalQty">1</span>
+        <button class="modal-qty-btn" onclick="changeQty(1)">+</button>
+      </div>
+      <button class="modal-add-btn" onclick="modalAddToCart()">
+        <span data-i18n="modal-add-btn">В корзину</span>
+        <span class="modal-add-price" id="modalPriceBtn"></span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ─── WISHLIST PANEL ─── -->
+<div class="wishlist-overlay" id="wishlistOverlay" onclick="closeWishlist()"></div>
+<aside class="wishlist-panel" id="wishlistPanel">
+
+  <div class="wishlist-panel-header">
+    <div class="wishlist-panel-title-wrap">
+      <svg viewBox="0 0 24 24" fill="var(--rose)" stroke="var(--rose)" stroke-width="1.4" width="20" height="20">
+        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+      </svg>
+      <span class="wishlist-panel-title" id="wishlistPanelTitle">Избранное</span>
+      <span class="wishlist-count-pill" id="wishlistCountPill">0</span>
+    </div>
+    <button class="wishlist-close-btn" onclick="closeWishlist()" aria-label="Закрыть">
+      <svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" width="16" height="16" fill="none">
+        <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+      </svg>
+    </button>
+  </div>
+
+  <!-- Empty state (visible when no items) -->
+  <div class="wishlist-empty" id="wishlistEmpty">
+    <div class="wishlist-empty-icon">
+      <svg viewBox="0 0 64 64" fill="none" width="42" height="42">
+        <path d="M32 54s-24-13-24-28a13 13 0 0 1 24-7 13 13 0 0 1 24 7c0 15-24 28-24 28z"
+              stroke="var(--rose)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+    <p class="wishlist-empty-title" id="wishlistEmptyTitle">Пусто пока...</p>
+    <p class="wishlist-empty-sub" id="wishlistEmptySub">Нажмите ♡ на любом букете — и он появится здесь</p>
+    <button class="wishlist-empty-cta" onclick="closeWishlist(); document.getElementById('catalog').scrollIntoView({behavior:'smooth'})">
+      Посмотреть каталог
+    </button>
+  </div>
+
+  <!-- Cards list -->
+  <div class="wishlist-body" id="wishlistBody"></div>
+
+  <!-- Footer with total + action -->
+  <div class="wishlist-footer" id="wishlistFooter">
+    <div class="wishlist-footer-row">
+      <div>
+        <span class="wishlist-footer-label" id="wlFooterLabel">Итого</span>
+        <p class="wishlist-footer-items-note" id="wlItemsNote"></p>
+      </div>
+      <span class="wishlist-footer-total" id="wlFooterTotal">0 <span>TJS</span></span>
+    </div>
+    <button class="wl-btn-all-cart" onclick="addAllToCart()">
+      <span id="wlAllCartLabel">Добавить всё в корзину</span>
+    </button>
+  </div>
+
+</aside>
+
+
+<!-- ─── CART OVERLAY ─── -->
+<div class="cart-overlay" id="cartOverlay" onclick="closeCart()"></div>
+
+<!-- ─── CART PANEL ─── -->
+<aside class="cart-panel" id="cartPanel">
+  <div class="cart-panel-bg"></div>
+
+  <!-- Header -->
+  <div class="cart-header">
+    <div class="cart-header-left">
+      <svg viewBox="0 0 24 24" fill="none" stroke="var(--rose)" stroke-width="1.8" stroke-linecap="round" width="20" height="20">
+        <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
+        <line x1="3" y1="6" x2="21" y2="6"/>
+        <path d="M16 10a4 4 0 0 1-8 0"/>
+      </svg>
+      <span class="cart-title" id="cartPanelTitle">Корзина</span>
+      <span class="cart-count-pill" id="cartCountPill">0</span>
+    </div>
+    <button class="cart-close-btn" onclick="closeCart()">
+      <svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none" width="16" height="16">
+        <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+      </svg>
+    </button>
+  </div>
+
+  <!-- Steps -->
+  <div class="cart-steps" id="cartStepsBar">
+    <div class="cart-step active" id="cartStep1Ind">
+      <div class="cart-step-num">1</div>
+      <span class="cart-step-name">Корзина</span>
+    </div>
+    <div class="cart-step-line"></div>
+    <div class="cart-step" id="cartStep2Ind">
+      <div class="cart-step-num">2</div>
+      <span class="cart-step-name">Оформление</span>
+    </div>
+    <div class="cart-step-line"></div>
+    <div class="cart-step" id="cartStep3Ind">
+      <div class="cart-step-num">3</div>
+      <span class="cart-step-name">Отправить</span>
+    </div>
+  </div>
+
+  <!-- Body -->
+  <div class="cart-body" id="cartBody">
+
+    <!-- STEP 1: Items + extras -->
+    <div id="cartViewStep1">
+      <div class="cart-step1" id="cartItemsList">
+        <!-- filled by JS -->
+      </div>
+
+      <!-- Empty state -->
+      <div class="cart-empty" id="cartEmptyState" style="display:none">
+        <div class="cart-empty-icon">🛍️</div>
+        <p class="cart-empty-title">Корзина пуста</p>
+        <p class="cart-empty-sub">Добавьте букеты из нашего каталога</p>
+        <button class="cart-empty-cta" onclick="closeCart(); document.getElementById('catalog').scrollIntoView({behavior:'smooth'})">
+          Смотреть каталог
+        </button>
+      </div>
+
+      <!-- Extras (hidden when empty) -->
+      <div id="cartExtrasSection" style="display:none">
+        <div class="cart-step1" style="padding-top:0">
+
+          <p class="cart-extras-title">Добавить к заказу</p>
+
+          <!-- Открытка -->
+          <div class="cart-extra-row" id="extraCard" onclick="toggleExtra('card')">
+            <img class="cart-extra-img" src="images/otkritka.jpg" alt="Открытка" onerror="this.style.background='var(--blush)';this.src=''">
+            <div class="cart-extra-info">
+              <div class="cart-extra-name">Открытка</div>
+              <div class="cart-extra-sub">С любым пожеланием 💌</div>
+            </div>
+            <span class="cart-extra-price" style="color:var(--leaf);font-size:12px;letter-spacing:0.06em">БЕСПЛАТНО</span>
+            <div class="cart-extra-check">✓</div>
+          </div>
+
+          <!-- Шоколадка 1 -->
+          <div class="cart-extra-row" id="extraChoc1" onclick="toggleExtra('choc1')">
+            <img class="cart-extra-img" src="images/saka.jpg" alt="Шоколадка" onerror="this.style.background='var(--sand)';this.src=''">
+            <div class="cart-extra-info">
+              <div class="cart-extra-name">Шоколад MILK</div>
+              <div class="cart-extra-sub">Молочный, 100г <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="13" height="13" style="vertical-align:middle"><rect x="2" y="4" width="20" height="16" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/><line x1="8" y1="4" x2="8" y2="20"/><line x1="16" y1="4" x2="16" y2="20"/></svg></div>
+            </div>
+            <div class="cart-extra-qty" id="choc1Qty" onclick="event.stopPropagation()">
+              <button class="cart-extra-qty-btn" onclick="changeExtraQty('choc1',-1)">−</button>
+              <span class="cart-extra-qty-num" id="choc1QtyNum">1</span>
+              <button class="cart-extra-qty-btn" onclick="changeExtraQty('choc1',+1)">+</button>
+            </div>
+            <span class="cart-extra-price" id="choc1Price">10 TJS</span>
+            <div class="cart-extra-check">✓</div>
+          </div>
+
+          <!-- Шоколадка 2 -->
+          <div class="cart-extra-row" id="extraChoc2" onclick="toggleExtra('choc2')">
+            <img class="cart-extra-img" src="images/saka2.jpg" alt="Шоколадка 2" onerror="this.style.background='var(--sand)';this.src=''">
+            <div class="cart-extra-info">
+              <div class="cart-extra-name">Шоколад ANPELGOLD</div>
+              <div class="cart-extra-sub">Горький 72%, 80г <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="13" height="13" style="vertical-align:middle"><rect x="2" y="4" width="20" height="16" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/><line x1="8" y1="4" x2="8" y2="20"/><line x1="16" y1="4" x2="16" y2="20"/></svg></div>
+            </div>
+            <div class="cart-extra-qty" id="choc2Qty" onclick="event.stopPropagation()">
+              <button class="cart-extra-qty-btn" onclick="changeExtraQty('choc2',-1)">−</button>
+              <span class="cart-extra-qty-num" id="choc2QtyNum">1</span>
+              <button class="cart-extra-qty-btn" onclick="changeExtraQty('choc2',+1)">+</button>
+            </div>
+            <span class="cart-extra-price" id="choc2Price">11 TJS</span>
+            <div class="cart-extra-check">✓</div>
+          </div>
+
+          <!-- Шоколадка 3 -->
+          <div class="cart-extra-row" id="extraChoc3" onclick="toggleExtra('choc3')">
+            <img class="cart-extra-img" src="images/saka3.jpg" alt="Шоколадка 3" onerror="this.style.background='var(--sand)';this.src=''">
+            <div class="cart-extra-info">
+              <div class="cart-extra-name">Шоколад Трюфель</div>
+              <div class="cart-extra-sub">Ассорти, 120г <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="13" height="13" style="vertical-align:middle"><rect x="2" y="4" width="20" height="16" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/><line x1="8" y1="4" x2="8" y2="20"/><line x1="16" y1="4" x2="16" y2="20"/></svg></div>
+            </div>
+            <div class="cart-extra-qty" id="choc3Qty" onclick="event.stopPropagation()">
+              <button class="cart-extra-qty-btn" onclick="changeExtraQty('choc3',-1)">−</button>
+              <span class="cart-extra-qty-num" id="choc3QtyNum">1</span>
+              <button class="cart-extra-qty-btn" onclick="changeExtraQty('choc3',+1)">+</button>
+            </div>
+            <span class="cart-extra-price" id="choc3Price">15 TJS</span>
+            <div class="cart-extra-check">✓</div>
+          </div>
+
+        </div>
+        <div class="cart-step1-bottom"></div>
+      </div>
+    </div><!-- /step1 -->
+
+    <!-- STEP 2: Order form -->
+    <div id="cartViewStep2" style="display:none">
+      <div class="cart-step2" style="padding-bottom: 16px;">
+
+        <!-- ⏱ Prep-time banner -->
+        <div class="cart-prep-banner">
+          <span class="cart-prep-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="17" height="17"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15.5 14"/></svg>
+          </span>
+          <span>Заказ в среднем готовится <strong>50–90 минут</strong></span>
+        </div>
+
+        <!-- Recipient toggle -->
+        <p class="cart-form-label" style="margin-bottom:12px; margin-top:4px;">Кому заказываем?</p>
+        <div class="cart-recipient-toggle">
+          <div class="cart-rec-btn active" id="recSelf" onclick="setRecipient('self')">
+            <span class="cart-rec-emoji"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="26" height="26"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg></span>
+            <div class="cart-rec-label">Себе</div>
+            <div class="cart-rec-sub">Заберу сам(а)</div>
+          </div>
+          <div class="cart-rec-btn" id="recOther" onclick="setRecipient('other')">
+            <span class="cart-rec-emoji"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="26" height="26"><polyline points="20 12 20 22 4 22 4 12"/><rect x="2" y="7" width="20" height="5"/><line x1="12" y1="22" x2="12" y2="7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg></span>
+            <div class="cart-rec-label">Другому</div>
+            <div class="cart-rec-sub">Отправить в подарок</div>
+          </div>
+        </div>
+
+        <!-- Fields for SELF -->
+        <div id="formSelf">
+          <div class="cart-form-section">
+            <label class="cart-form-label">Ваше имя *</label>
+            <input class="cart-input" id="selfName" type="text" placeholder="Как вас зовут?" autocomplete="name">
+          </div>
+          <div class="cart-form-section">
+            <label class="cart-form-label">Номер телефона *</label>
+            <div class="cart-phone-group">
+              <span class="cart-phone-prefix">+992</span>
+              <input class="cart-input cart-phone-input" id="selfPhone" type="tel" inputmode="numeric" placeholder="XX XXX XX XX" autocomplete="tel">
+            </div>
+          </div>
+          <div class="cart-form-section">
+            <label class="cart-form-label">Адрес доставки *</label>
+            <input class="cart-input" id="selfAddress" type="text" placeholder="Улица, дом, квартира">
+          </div>
+          <div class="cart-form-section">
+            <label class="cart-form-label">Комментарий к заказу</label>
+            <textarea class="cart-textarea" id="selfComment" placeholder="Пожелания, детали..."></textarea>
+          </div>
+        </div>
+
+        <!-- Fields for OTHER -->
+        <div id="formOther" style="display:none">
+          <div class="cart-form-section">
+            <label class="cart-form-label">Имя получателя *</label>
+            <input class="cart-input" id="otherRecName" type="text" placeholder="Кому адресован подарок?">
+          </div>
+          <div class="cart-form-section">
+            <label class="cart-form-label">Телефон получателя *</label>
+            <div class="cart-phone-group">
+              <span class="cart-phone-prefix">+992</span>
+              <input class="cart-input cart-phone-input" id="otherRecPhone" type="tel" inputmode="numeric" placeholder="XX XXX XX XX">
+            </div>
+          </div>
+          <div class="cart-form-section">
+            <label class="cart-form-label">Ваш номер телефона *</label>
+            <div class="cart-phone-group">
+              <span class="cart-phone-prefix">+992</span>
+              <input class="cart-input cart-phone-input" id="otherSenderPhone" type="tel" inputmode="numeric" placeholder="XX XXX XX XX" autocomplete="tel">
+            </div>
+          </div>
+          <div class="cart-form-section">
+            <label class="cart-form-label">Адрес получателя *</label>
+            <input class="cart-input" id="otherAddress" type="text" placeholder="Куда доставить?">
+          </div>
+          <div class="cart-form-section">
+            <label class="cart-form-label">Комментарий</label>
+            <textarea class="cart-textarea" id="otherComment" placeholder="Пожелания, детали..."></textarea>
+          </div>
+        </div>
+
+        <!-- 💌 Greeting card text (shown only if card selected) -->
+        <div class="cart-form-section cart-card-text-wrap" id="cartCardTextWrap" style="display:none">
+          <label class="cart-form-label cart-card-text-label">
+            <svg viewBox="0 0 24 24" fill="none" stroke="var(--rose)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="15" height="15"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            Текст открытки
+          </label>
+          <textarea class="cart-textarea cart-card-textarea" id="cardText" rows="3" placeholder="Напишите пожелание — наш флорист красиво оформит 💌" maxlength="200"></textarea>
+          <div class="cart-card-text-counter"><span id="cardTextCount">0</span>/200</div>
+        </div>
+
+        <!-- 🗓 Schedule field -->
+        <div class="cart-form-section cart-schedule-wrap">
+          <label class="cart-form-label cart-schedule-label">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="15" height="15"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+            Желаемое время доставки
+          </label>
+          <div class="cart-schedule-row">
+            <button class="cart-schedule-chip active" id="schedNow" onclick="setSchedule('now',this)">Как можно скорее</button>
+            <button class="cart-schedule-chip" id="schedLater" onclick="setSchedule('later',this)">Выбрать время</button>
+          </div>
+          <div id="schedDateTimeWrap" style="display:none;margin-top:10px">
+            <input class="cart-input" type="datetime-local" id="schedDateTime" style="padding-right:12px">
+          </div>
+        </div>
+
+        <!-- Mini order summary -->
+        <div class="cart-order-summary" id="cartOrderSummary">
+          <!-- filled by JS -->
+        </div>
+
+      </div>
+    </div><!-- /step2 -->
+
+    <!-- STEP 3: Send order via social network -->
+    <div id="cartViewStep3" style="display:none">
+
+      <!-- Choose social (default view) -->
+      <div class="cart-social-step" id="cartSocialChoose">
+        <div class="cart-social-header">
+          <div class="cart-social-petals">✿ ✦ ✿</div>
+          <p class="cart-social-title">Выберите соцсеть</p>
+          <p class="cart-social-sub">Ваш заказ будет отправлен менеджеру — она свяжется с вами и подтвердит детали</p>
+        </div>
+
+        <!-- Order number preview -->
+        <div class="cart-social-order-num" id="cartOrderNum">#GULREZ-0000</div>
+
+        <!-- Social buttons -->
+        <button class="cart-social-btn cart-social-wa" onclick="placeOrderWhatsApp()">
+          <span class="cart-social-btn-icon">
+            <svg viewBox="0 0 24 24" fill="currentColor" width="26" height="26"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          </span>
+          <div class="cart-social-btn-text">
+            <span class="cart-social-btn-name">WhatsApp</span>
+            <span class="cart-social-btn-hint">Отправить заказ</span>
+          </div>
+          <svg class="cart-social-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" width="16" height="16"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </button>
+
+        <button class="cart-social-btn cart-social-ig" onclick="placeOrderInstagram()">
+          <span class="cart-social-btn-icon">
+            <svg viewBox="0 0 24 24" fill="currentColor" width="26" height="26"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+          </span>
+          <div class="cart-social-btn-text">
+            <span class="cart-social-btn-name">Instagram</span>
+            <span class="cart-social-btn-hint">Написать в Direct</span>
+          </div>
+          <svg class="cart-social-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" width="16" height="16"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </button>
+      </div>
+
+      <!-- Sent confirmation (shown after clicking a social btn) -->
+      <div class="cart-confirm" id="cartSocialDone" style="display:none">
+        <div class="cart-confirm-icon cart-confirm-icon--sent">✈️</div>
+        <p class="cart-confirm-title">Заказ отправлен!</p>
+        <p class="cart-confirm-order-num" id="cartOrderNumDone"></p>
+        <p class="cart-confirm-sub" id="cartConfirmSubText">Менеджер свяжется с вами в ближайшее время 🌸</p>
+        <p class="cart-confirm-hint" id="cartIgHint" style="display:none">
+          💡 Текст заказа скопирован в буфер — вставьте его в Instagram Direct
+        </p>
+        <button class="cart-empty-cta" style="margin-top:16px" onclick="closeCart()">Отлично, закрыть!</button>
+      </div>
+
+    </div>
+
+  </div><!-- /cart-body -->
+
+  <!-- Sticky footer -->
+  <div class="cart-footer" id="cartFooter">
+    <div class="cart-footer-total-row">
+      <div>
+        <div class="cart-footer-label">Итого</div>
+        <div class="cart-footer-note" id="cartFooterNote"></div>
+      </div>
+      <div class="cart-footer-total" id="cartFooterTotal">0 <span>TJS</span></div>
+    </div>
+    <button class="cart-btn-next" id="cartNextBtn" onclick="cartNextStep()">
+      <span id="cartNextLabel">Перейти к оформлению</span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" width="16" height="16">
+        <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
+      </svg>
+    </button>
+    <button class="cart-btn-back" id="cartBackBtn" onclick="cartPrevStep()" style="display:none">
+      ← Назад к корзине
+    </button>
+  </div>
+
+</aside>
+
+<!-- ─── SEARCH PANEL ─── -->
+<div class="search-overlay" id="searchOverlay" onclick="closeSearch()"></div>
+<div class="search-panel" id="searchPanel">
+  <div class="search-panel-inner">
+
+    <!-- Top bar: field + close -->
+    <div class="search-top-row">
+      <div class="search-field-wrap">
+        <svg class="search-field-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="7.5"/><line x1="21" y1="21" x2="16.4" y2="16.4"/>
+        </svg>
+        <input class="search-field" id="searchInput" type="text"
+               placeholder="Поиск букетов..." autocomplete="off" spellcheck="false"
+               oninput="doSearch(this.value)"
+               onkeydown="if(event.key==='Escape')closeSearch()">
+        <button class="search-field-clear" id="searchClearBtn" onclick="clearSearch()" style="display:none" aria-label="Очистить">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" width="13" height="13">
+            <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+          </svg>
+        </button>
+      </div>
+      <button class="search-close-btn" onclick="closeSearch()" aria-label="Закрыть поиск">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" width="16" height="16">
+          <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Initial state: popular tags -->
+    <div id="searchInitialState">
+      <p class="search-hint-label" data-i18n="search-popular">Популярные запросы</p>
+      <div class="search-tags">
+        <button class="search-tag" onclick="setSearch('Розы')">Розы</button>
+        <button class="search-tag" onclick="setSearch('Тюльпаны')">Тюльпаны</button>
+        <button class="search-tag" onclick="setSearch('Пионы')">Пионы</button>
+        <button class="search-tag" onclick="setSearch('Хризантемы')">Хризантемы</button>
+        <button class="search-tag" onclick="setSearch('Подсолнухи')">Подсолнухи</button>
+        <button class="search-tag" onclick="setSearch('Лаванда')">Лаванда</button>
+        <button class="search-tag" onclick="setSearch('Premium')">Premium</button>
+        <button class="search-tag" onclick="setSearch('Хит')">Хит</button>
+      </div>
+    </div>
+
+    <!-- Results area -->
+    <div id="searchResultsArea" style="display:none">
+      <p class="search-results-label" id="searchCountLabel"></p>
+      <div class="search-results-grid" id="searchResultsGrid"></div>
+    </div>
+
+    <!-- No results -->
+    <div class="search-no-results-state" id="searchNoResults" style="display:none">
+      <svg viewBox="0 0 64 64" fill="none" width="52" height="52">
+        <circle cx="27" cy="27" r="17" stroke="var(--taupe)" stroke-width="2" stroke-linecap="round"/>
+        <line x1="40" y1="40" x2="56" y2="56" stroke="var(--taupe)" stroke-width="2.5" stroke-linecap="round"/>
+        <line x1="21" y1="27" x2="33" y2="27" stroke="var(--rose)" stroke-width="2.2" stroke-linecap="round"/>
+        <line x1="27" y1="21" x2="27" y2="33" stroke="var(--rose)" stroke-width="2.2" stroke-linecap="round"/>
+      </svg>
+      <p>Ничего не найдено</p>
+      <p class="search-no-results-sub-text" id="searchNoResultsMsg">Попробуйте другое название</p>
+    </div>
+
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script src="js/script.js"></script>
+<script src="js/language.js"></script>
+<script>
+// ── Auth: show username + dropdown instead of login button ───────────────
+(function() {
+  fetch('/api/me', { credentials: 'same-origin' })
+    .then(r => r.json())
+    .then(data => {
+      window._isLoggedIn = !!data.loggedIn;
+      if (!data.loggedIn) return;
+
+      // Desktop header
+      const wrap = document.getElementById('authBtnWrap');
+      if (wrap) {
+        wrap.innerHTML =
+          '<div class="user-menu" id="userMenu">' +
+            '<button class="user-menu-trigger" onclick="toggleUserMenu(event)">' +
+              '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" width="14" height="14"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>' +
+              ' ' + data.login +
+              '<svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" width="11" height="11"><polyline points="6 9 12 15 18 9"/></svg>' +
+            '</button>' +
+            '<div class="user-menu-dropdown" id="userMenuDrop">' +
+              (data.role === 'admin' ? '<a href="/admin" class="user-menu-item">&#9881; Панель управления</a>' : '<a href="/user" class="user-menu-item">&#128100; Мой профиль</a>') +
+              '<button class="user-menu-item user-menu-logout" onclick="siteLogout()">&#10005; Выйти</button>' +
+            '</div>' +
+          '</div>';
+      }
+
+      // Mobile nav — user card
+      const mWrap = document.getElementById('mobileAuthBtnWrap');
+      if (mWrap) {
+        const initial = data.login.charAt(0).toUpperCase();
+        const roleLabel = data.role === 'admin' ? 'Администратор' : 'Пользователь';
+        const dest = data.role === 'admin' ? '/admin' : '/user';
+        mWrap.innerHTML =
+          '<div class="mob-user-logged">' +
+            '<a href="' + dest + '" class="mobile-login-btn mob-username-btn" onclick="closeMobileNav()">' +
+              data.login +
+            '</a>' +
+            '<button onclick="siteLogout()" class="mob-icon-btn mob-icon-btn-logout" title="Выйти">' +
+              '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" width="13" height="13"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>' +
+            '</button>' +
+          '</div>';
+      }
+    }).catch(() => {});
+
+  window.toggleUserMenu = function(e) {
+    e.stopPropagation();
+    const d = document.getElementById('userMenuDrop');
+    if (d) d.classList.toggle('open');
+  };
+  document.addEventListener('click', function() {
+    const d = document.getElementById('userMenuDrop');
+    if (d) d.classList.remove('open');
+  });
+  window.siteLogout = function() {
+    fetch('/logout', { method: 'POST', credentials: 'same-origin' })
+      .then(() => location.reload());
+  };
+})();
+
+// ── Load hero settings from server ───────────────────────────────────────────
+(function() {
+  fetch('/api/hero')
+    .then(r => r.json())
+    .then(data => {
+      if (!data) return;
+
+      // Apply slide background images
+      const slideClasses = ['slide-1','slide-2','slide-3','slide-4'];
+      slideClasses.forEach((cls, i) => {
+        const el = document.querySelector('.' + cls);
+        if (el && data.images[i]) {
+          el.style.backgroundImage = `url('${data.images[i]}')`;
+        }
+      });
+
+      // Store quotes for all languages — override defaults from script.js / language.js
+      window._heroData = data;
+      window._heroQuotes = data.quotes.RU;
+
+      // Show first quote right away
+      const q = document.getElementById('heroQuote');
+      if (q && data.quotes.RU[0]) q.textContent = data.quotes.RU[0];
+    })
+    .catch(() => {});
+})();
+</script>
+
+<!-- ═══════════════════════════════════════
+     FLOATING CHAT WIDGET
+═══════════════════════════════════════ -->
+<div class="fcw-wrap" id="fcwWrap" style="opacity:0;transform:scale(0.5);pointer-events:none;transition:opacity 0.4s ease,transform 0.4s cubic-bezier(0.34,1.56,0.64,1);">
+
+  <!-- Bubble popup -->
+  <div class="fcw-bubble" id="fcwBubble">
+    <div class="fcw-bubble-arrow"></div>
+    <p class="fcw-bubble-text">Ассаламу алейкум! 🌸 Нужна помощь?</p>
+  </div>
+
+  <!-- Chat panel -->
+  <div class="fcw-panel" id="fcwPanel">
+
+    <!-- Header -->
+    <div class="fcw-panel-header">
+      <div class="fcw-panel-avatar">
+        <img src="images/malika.png" alt="Malika" class="fcw-avatar-img" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <span class="fcw-avatar-fallback">M</span>
+        <span class="fcw-online-dot"></span>
+      </div>
+      <div class="fcw-panel-info">
+        <span class="fcw-panel-name">Чат поддержка</span>
+        <span class="fcw-panel-status">
+          <span class="fcw-status-role">Флорист</span>
+          <span class="fcw-status-sep">·</span>
+          <span class="fcw-status-online"><span class="fcw-status-dot"></span>в сети</span>
+        </span>
+      </div>
+      <button class="fcw-panel-close" onclick="fcwToggle()" aria-label="Закрыть">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" width="16" height="16"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+
+    <!-- Messages area -->
+    <div class="fcw-messages" id="fcwMessages">
+      <div class="fcw-msg fcw-msg-in">
+        <div class="fcw-msg-inner">
+          <div class="fcw-msg-bubble" id="fcwGreetMsg">Ассаламу алейкум! 🌸 Я Малика, флорист GULREZ.<br>Чем могу помочь?</div>
+          <button class="fcw-react-btn" title="Реакция" onclick="_fcwTogglePicker(this)">☺</button>
+          <div class="fcw-react-picker" style="display:none">
+            <button class="fcw-react-emoji" onclick="_fcwPickReaction(this,'❤️')">❤️</button>
+            <button class="fcw-react-emoji" onclick="_fcwPickReaction(this,'😍')">😍</button>
+            <button class="fcw-react-emoji" onclick="_fcwPickReaction(this,'🔥')">🔥</button>
+            <button class="fcw-react-emoji" onclick="_fcwPickReaction(this,'👍')">👍</button>
+            <button class="fcw-react-emoji" onclick="_fcwPickReaction(this,'😊')">😊</button>
+          </div>
+          <div class="fcw-react-result" style="display:none"></div>
+        </div>
+        <span class="fcw-msg-time">сейчас</span>
+      </div>
+    </div>
+
+    <!-- Quick replies -->
+    <div class="fcw-quick-replies" id="fcwQuickReplies">
+      <button class="fcw-quick-btn" onclick="fcwQuickSend(this,'Хочу заказать букет 🌹')">Заказать букет 🌹</button>
+      <button class="fcw-quick-btn" onclick="fcwQuickSend(this,'Узнать цену')">Узнать цену</button>
+      <button class="fcw-quick-btn" onclick="fcwQuickSend(this,'Время доставки')">Время доставки</button>
+      <button class="fcw-quick-btn" onclick="fcwQuickSend(this,'Есть ли скидки?')">Скидки?</button>
+    </div>
+
+    <!-- Input -->
+    <div class="fcw-input-row">
+      <label class="fcw-photo-btn" title="Отправить фото">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" width="17" height="17"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+        <input type="file" accept="image/*" style="display:none" onchange="fcwSendPhoto(this)">
+      </label>
+      <textarea class="fcw-input" id="fcwInput" placeholder="Написать сообщение…" rows="1"
+        onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();fcwSend()}"
+        oninput="this.style.height='auto';this.style.height=Math.min(this.scrollHeight,100)+'px'"></textarea>
+      <button class="fcw-send-btn" onclick="fcwSend()" aria-label="Отправить">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" width="18" height="18"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+      </button>
+    </div>
+
+    <!-- Footer: choose messenger -->
+    <div class="fcw-footer">
+      <span class="fcw-footer-label">Написать напрямую:</span>
+      <a class="fcw-footer-btn fcw-wa" href="https://wa.me/79965450272" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        WhatsApp
+      </a>
+      <a class="fcw-footer-btn fcw-ig" href="https://ig.me/m/xalilovv.o9" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+        Instagram
+      </a>
+    </div>
+
+  </div>
+
+  <!-- FAB button -->
+  <button class="fcw-fab" id="fcwFab" aria-label="Открыть чат">
+    <span class="fcw-fab-avatar">
+      <img src="images/malika.png" alt="Malika" class="fcw-avatar-img" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+      <span class="fcw-avatar-fallback">M</span>
+    </span>
+    <span class="fcw-fab-close-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" width="22" height="22"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </span>
+    <span class="fcw-fab-badge" id="fcwBadge" style="display:none">1</span>
+  </button>
+
+  <!-- Dismiss (hide) button — appears on hover -->
+  <button class="fcw-dismiss-btn" id="fcwDismissBtn" onclick="fcwDismiss()" title="Скрыть чат">×</button>
+
+</div>
+
+<script>
+// ══════════════════════════════════════════
+//  GULREZ CHAT WIDGET
+// ══════════════════════════════════════════
+
+// ── Check if chat is enabled by admin + apply saved corner ──
+(async () => {
+  try {
+    const cfg = await fetch('/api/chat/config').then(r => r.json());
+    if (!cfg.chat_enabled) {
+      document.getElementById('fcwWrap').style.display = 'none';
+      return;
+    }
+    // Apply admin-set corner (override localStorage if admin set it)
+    if (cfg.widget_corner) {
+      localStorage.setItem('_fcw_corner', cfg.widget_corner);
+    }
+  } catch(_) {}
+})();
+
+// ── Check if user has dismissed the widget ──
+if (localStorage.getItem('_fcw_dismissed') === '1') {
+  document.getElementById('fcwWrap').style.display = 'none';
+}
+
+// ── Session management (sessionStorage = new session per tab/visit) ──
+const _FCW_SID_KEY = '_fcw_session_id';
+let _fcwSid = sessionStorage.getItem(_FCW_SID_KEY) || null;
+
+function _fcwGetSidParam() {
+  return _fcwSid ? `_sid=${encodeURIComponent(_fcwSid)}` : '';
+}
+
+// ── Notification sound ──
+let _fcwAudioCtx = null;
+let _fcwUserGestured = false;
+document.addEventListener('click', () => { _fcwUserGestured = true; }, { once: true, passive: true });
+
+function _fcwPlayNotif() {
+  if (!_fcwUserGestured) return;
+  try {
+    if (!_fcwAudioCtx) _fcwAudioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    const ctx = _fcwAudioCtx;
+    if (ctx.state === 'suspended') ctx.resume();
+    const play = (freq, start, dur) => {
+      const o = ctx.createOscillator(), g = ctx.createGain();
+      o.connect(g); g.connect(ctx.destination);
+      o.type = 'sine';
+      o.frequency.setValueAtTime(freq, ctx.currentTime + start);
+      g.gain.setValueAtTime(0, ctx.currentTime + start);
+      g.gain.linearRampToValueAtTime(0.15, ctx.currentTime + start + 0.01);
+      g.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + start + dur);
+      o.start(ctx.currentTime + start);
+      o.stop(ctx.currentTime + start + dur);
+    };
+    play(880, 0, 0.12); play(1100, 0.13, 0.18);
+  } catch(_) {}
+}
+
+// ── Triggers ──
+let _fcwTriggers = [];
+async function _fcwLoadTriggers() {
+  try { _fcwTriggers = await fetch('/api/chat/triggers').then(r => r.json()); } catch(_) {}
+}
+_fcwLoadTriggers();
+
+// ── State ──
+let _fcwOpen = false;
+let _fcwBubbleTimer = null;
+let _fcwLastMsgId = 0;
+let _fcwPollTimer = null;
+let _fcwWaitingAdmin = false;
+let _fcwSentMsgIds = [];
+
+// ── Greeting personalization ──
+function _fcwPersonalizeGreeting() {
+  const name = window._userLogin;
+  const el   = document.getElementById('fcwGreetMsg');
+  if (!el) return;
+  const greeting = name
+    ? `Ассаламу алейкум, <b>${name}</b>! 🌸 Я Малика, флорист GULREZ.<br>Чем могу помочь?`
+    : `Ассаламу алейкум! 🌸 Я Малика, флорист GULREZ.<br>Чем могу помочь?`;
+  el.innerHTML = greeting;
+  const bubbleText = name
+    ? `Ассаламу алейкум, ${name}! 🌸 Нужна помощь?`
+    : `Ассаламу алейкум! 🌸 Нужна помощь?`;
+  document.getElementById('fcwBubble').querySelector('.fcw-bubble-text').textContent = bubbleText;
+}
+setTimeout(_fcwPersonalizeGreeting, 800);
+
+// ── Toggle ──
+function fcwToggle() {
+  _fcwOpen = !_fcwOpen;
+  document.getElementById('fcwPanel').classList.toggle('open', _fcwOpen);
+  document.getElementById('fcwFab').classList.toggle('open', _fcwOpen);
+  document.body.style.overflow = _fcwOpen ? 'hidden' : '';
+  if (_fcwOpen) {
+    document.getElementById('fcwBubble').classList.remove('show');
+    clearTimeout(_fcwBubbleTimer);
+    document.getElementById('fcwBadge').style.display = 'none';
+    setTimeout(() => document.getElementById('fcwInput').focus(), 300);
+    _fcwScrollDown();
+  }
+}
+
+// ── Send message ──
+async function fcwSend() {
+  const inp  = document.getElementById('fcwInput');
+  const text = inp.value.trim();
+  if (!text) return;
+  const msgEl = _fcwAddMsg(text, 'out');
+  inp.value = ''; inp.style.height = 'auto';
+
+  try {
+    const body = { text };
+    if (_fcwSid) body._sid = _fcwSid;
+    const r = await fetch('/api/chat/message', {
+      method: 'POST', credentials: 'same-origin',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(body)
+    });
+    const d = await r.json();
+    if (d.ok) {
+      // Store session ID in sessionStorage
+      if (d.session_id && !_fcwSid) {
+        _fcwSid = d.session_id;
+        sessionStorage.setItem(_FCW_SID_KEY, _fcwSid);
+      }
+      if (d.msg_id) _fcwSentMsgIds.push({ el: msgEl, id: d.msg_id });
+      if (!_fcwPollTimer) _fcwStartPolling();
+    }
+  } catch(_) {}
+
+  // Bot reply with typing delay
+  const delay = 600 + Math.random() * 600;
+  setTimeout(() => {
+    _fcwShowTyping('fcwTyping');
+    setTimeout(async () => {
+      _fcwHideTyping('fcwTyping');
+      await _fcwRespond(text);
+    }, delay);
+  }, 150);
+}
+
+function fcwQuickSend(btn, text) {
+  document.getElementById('fcwInput').value = text;
+  fcwSend();
+}
+
+// ── Photo send ──
+function fcwSendPhoto(input) {
+  const file = input.files[0];
+  if (!file) return;
+  const url = URL.createObjectURL(file);
+  const wrap = document.getElementById('fcwMessages');
+  const now  = _fcwNow();
+  const div  = document.createElement('div');
+  div.className = 'fcw-msg fcw-msg-out';
+  div.innerHTML = `<div class="fcw-msg-inner"><div class="fcw-msg-bubble fcw-msg-photo"><img src="${url}" class="fcw-photo-img" onclick="_fcwOpenPhoto(this)" alt="фото"></div><span class="fcw-msg-tick fcw-tick-sent">✓</span></div><span class="fcw-msg-time">${now}</span>`;
+  wrap.appendChild(div); _fcwScrollDown(); input.value = '';
+  const photoReplies = ['Красивое фото! 📸 Если это ваш заказ — спасибо за доверие! 🌸', 'Ого, красота! 🌹 Это наш букет? Рада что нравится!', 'Обожаю такие фото! 📸 Оставьте отзыв на сайте — порадуйте нас 🌸'];
+  setTimeout(() => {
+    _fcwShowTyping('fcwTyping');
+    setTimeout(() => { _fcwHideTyping('fcwTyping'); _fcwAddMsg(photoReplies[Math.floor(Math.random()*photoReplies.length)], 'in'); }, 900);
+  }, 400);
+}
+
+function _fcwOpenPhoto(img) {
+  const o = document.createElement('div');
+  o.style.cssText = 'position:fixed;inset:0;z-index:99999;background:rgba(0,0,0,0.88);display:flex;align-items:center;justify-content:center;cursor:zoom-out';
+  o.innerHTML = `<img src="${img.src}" style="max-width:92vw;max-height:90vh;border-radius:14px;box-shadow:0 8px 48px rgba(0,0,0,0.6)">`;
+  o.onclick = () => o.remove(); document.body.appendChild(o);
+}
+
+// ── Reactions ──
+const FCW_REACTIONS = ['❤️','😍','🔥','👍','😊'];
+
+function _fcwAddMsg(text, dir) {
+  const wrap = document.getElementById('fcwMessages');
+  const now  = _fcwNow();
+  const div  = document.createElement('div');
+  div.className = `fcw-msg fcw-msg-${dir}`;
+  const tick = dir === 'out' ? `<span class="fcw-msg-tick fcw-tick-sent" title="Отправлено">✓</span>` : '';
+  div.innerHTML = `
+    <div class="fcw-msg-inner">
+      <div class="fcw-msg-bubble">${text}</div>
+      ${tick}
+      <button class="fcw-react-btn">☺</button>
+      <div class="fcw-react-picker" style="display:none">
+        ${FCW_REACTIONS.map(e => `<button class="fcw-react-emoji" onclick="_fcwPickReaction(this,'${e}')">${e}</button>`).join('')}
+      </div>
+      <div class="fcw-react-result" style="display:none"></div>
+    </div>
+    <span class="fcw-msg-time">${now}</span>`;
+  div.querySelector('.fcw-react-btn').addEventListener('click', (e) => {
+    e.stopPropagation();
+    const p = div.querySelector('.fcw-react-picker');
+    document.querySelectorAll('.fcw-react-picker').forEach(x => { if (x !== p) x.style.display = 'none'; });
+    p.style.display = p.style.display === 'none' ? 'flex' : 'none';
+  });
+  wrap.appendChild(div); _fcwScrollDown(); return div;
+}
+
+function _fcwTogglePicker(btn) {
+  const p = btn.closest('.fcw-msg-inner').querySelector('.fcw-react-picker');
+  document.querySelectorAll('.fcw-react-picker').forEach(x => { if (x !== p) x.style.display = 'none'; });
+  p.style.display = p.style.display === 'none' ? 'flex' : 'none';
+}
+
+function _fcwPickReaction(btn, emoji) {
+  const inner = btn.closest('.fcw-msg-inner');
+  inner.querySelector('.fcw-react-picker').style.display = 'none';
+  const res = inner.querySelector('.fcw-react-result');
+  const rb  = inner.querySelector('.fcw-react-btn');
+  if (res.textContent === emoji && res.style.display !== 'none') {
+    res.style.display = 'none'; rb.style.display = '';
+  } else {
+    res.textContent = emoji; res.style.display = 'flex';
+    res.style.animation = 'none';
+    requestAnimationFrame(() => { res.style.animation = ''; });
+    rb.style.display = 'none';
+  }
+}
+
+document.addEventListener('click', () => {
+  document.querySelectorAll('.fcw-react-picker').forEach(p => p.style.display = 'none');
+});
+
+// ── Typing indicator ──
+function _fcwShowTyping(id) {
+  if (document.getElementById(id)) return;
+  const wrap = document.getElementById('fcwMessages');
+  const div  = document.createElement('div');
+  div.className = 'fcw-msg fcw-msg-in fcw-typing-wrap'; div.id = id;
+  div.innerHTML = '<div class="fcw-msg-bubble fcw-typing"><span></span><span></span><span></span></div>';
+  wrap.appendChild(div); _fcwScrollDown();
+}
+function _fcwHideTyping(id) { const el = document.getElementById(id); if (el) el.remove(); }
+
+// ── Bot respond ──
+async function _fcwRespond(text) {
+  const t = text.toLowerCase();
+  let rawReply = null;
+
+  // Special: deals
+  if (['скидк','акци','распродаж','выгодно','дешевл'].some(k => t.includes(k))) {
+    rawReply = await _fcwDealsReply();
+  } else {
+    for (const tr of _fcwTriggers) {
+      const keys = tr.keywords.split(',').map(k => k.trim().toLowerCase()).filter(Boolean);
+      if (keys.some(k => t.includes(k))) { rawReply = tr.reply; break; }
+    }
+  }
+
+  if (rawReply) {
+    // Parse JSON array for multi-variant replies
+    let reply = rawReply;
+    try {
+      const arr = JSON.parse(rawReply);
+      if (Array.isArray(arr) && arr.length) reply = arr[Math.floor(Math.random() * arr.length)];
+    } catch(_) {}
+
+    _fcwWaitingAdmin = false;
+    _fcwAddMsg(reply, 'in');
+    _fcwNotifyIfClosed(reply);
+  } else {
+    // No bot answer — show persistent typing, wait for admin
+    _fcwWaitingAdmin = true;
+    _fcwShowTyping('fcwAdminTyping');
+    if (!_fcwPollTimer) _fcwStartPolling();
+  }
+}
+
+async function _fcwDealsReply() {
+  try {
+    const deals = await fetch('/api/chat/deals').then(r => r.json());
+    if (!deals.length) return '🌸 Сейчас все букеты по отличным ценам! Загляните в каталог ↓';
+    let msg = '🔥 Вот наши лучшие предложения:\n\n';
+    deals.forEach(d => {
+      const price = d.discount > 0
+        ? `<s>${d.price} TJS</s> → <b>${Math.round(d.price*(1-d.discount/100))} TJS</b> (-${d.discount}%)`
+        : `<b>${d.price} TJS</b>`;
+      msg += `🌹 ${d.name} — ${price}\n`;
+    });
+    msg += '\nОткрой каталог ↓ чтобы заказать!';
+    return msg;
+  } catch(_) { return '🌸 Загляните в каталог — там актуальные цены!'; }
+}
+
+function _fcwNotifyIfClosed(text) {
+  if (!_fcwOpen) {
+    _fcwPlayNotif();
+    document.getElementById('fcwBadge').style.display = 'flex';
+    const bt = text.replace(/<[^>]+>/g,'').split('\n')[0].slice(0, 60);
+    document.getElementById('fcwBubble').querySelector('.fcw-bubble-text').textContent = bt;
+    document.getElementById('fcwBubble').classList.add('show');
+    clearTimeout(_fcwBubbleTimer);
+    _fcwBubbleTimer = setTimeout(() => document.getElementById('fcwBubble').classList.remove('show'), 5000);
+  }
+}
+
+// ── Polling ──
+async function _fcwStartPolling() {
+  if (_fcwPollTimer) return;
+  // Get current max ID to not show old messages
+  try {
+    const sidParam = _fcwGetSidParam();
+    const init = await fetch(`/api/chat/init${sidParam ? '?' + sidParam : ''}`, { credentials: 'same-origin' }).then(r => r.json());
+    if (init.last_id > _fcwLastMsgId) _fcwLastMsgId = init.last_id;
+  } catch(_) {}
+
+  _fcwPollTimer = setInterval(async () => {
+    if (!_fcwSid) return;
+    try {
+      const sidParam = _fcwGetSidParam();
+      const data = await fetch(`/api/chat/poll?since=${_fcwLastMsgId}&${sidParam}`, { credentials: 'same-origin' }).then(r => r.json());
+      for (const msg of data.messages) {
+        if (msg.id > _fcwLastMsgId) {
+          _fcwLastMsgId = msg.id;
+          if (_fcwWaitingAdmin) { _fcwHideTyping('fcwAdminTyping'); _fcwWaitingAdmin = false; }
+          _fcwAddMsg(msg.text, 'in');
+          _fcwPlayNotif();
+          _fcwNotifyIfClosed(msg.text);
+        }
+      }
+      // Read receipts ✓ → ✓✓
+      if (_fcwSentMsgIds.length) {
+        const st = await fetch(`/api/chat/status?${sidParam}`, { credentials: 'same-origin' }).then(r => r.json());
+        if (st.read_up_to > 0) {
+          _fcwSentMsgIds.forEach(({ el, id }) => {
+            if (id <= st.read_up_to) {
+              const tick = el.querySelector('.fcw-msg-tick');
+              if (tick && !tick.classList.contains('fcw-tick-read')) {
+                tick.textContent = '✓✓'; tick.classList.replace('fcw-tick-sent','fcw-tick-read'); tick.title = 'Прочитано';
+              }
+            }
+          });
+        }
+      }
+    } catch(_) {}
+  }, 3000);
+}
+
+function _fcwScrollDown() { requestAnimationFrame(() => { const w = document.getElementById('fcwMessages'); if(w) w.scrollTop = w.scrollHeight; }); }
+function _fcwNow() { return new Date().toLocaleTimeString('tg', { hour:'2-digit', minute:'2-digit', timeZone:'Asia/Dushanbe' }); }
+
+// ── Show widget after 10s ──
+setTimeout(() => {
+  const w = document.getElementById('fcwWrap');
+  w.style.opacity = '1'; w.style.transform = 'scale(1)'; w.style.pointerEvents = '';
+  setTimeout(() => {
+    if (!_fcwOpen) {
+      _fcwPlayNotif();
+      const b = document.getElementById('fcwBubble');
+      b.classList.add('show');
+      document.getElementById('fcwBadge').style.display = 'flex';
+      _fcwBubbleTimer = setTimeout(() => b.classList.remove('show'), 6000);
+    }
+  }, 1200);
+}, 10000);
+
+// ── Resume polling if session exists from previous visit ──
+if (_fcwSid) { _fcwStartPolling(); }
+
+// ── Dismiss widget ──
+function fcwDismiss() {
+  localStorage.setItem('_fcw_dismissed', '1');
+  const w = document.getElementById('fcwWrap');
+  w.style.transition = 'opacity 0.3s, transform 0.3s';
+  w.style.opacity = '0';
+  w.style.transform = 'scale(0.5)';
+  setTimeout(() => { w.style.display = 'none'; }, 320);
+}
+
+// ── Draggable FAB ──
+(function() {
+  const wrap  = document.getElementById('fcwWrap');
+  const fab   = document.getElementById('fcwFab');
+  const SNAP_MARGIN = 20;   // px from edge when snapping
+  let dragging = false, startX, startY, startLeft, startTop, moved = false;
+
+  // Restore saved corner position
+  const savedCorner = localStorage.getItem('_fcw_corner');
+  if (savedCorner) _fcwApplyCorner(savedCorner);
+
+  function _fcwApplyCorner(corner) {
+    wrap.style.removeProperty('bottom');
+    wrap.style.removeProperty('right');
+    wrap.style.removeProperty('top');
+    wrap.style.removeProperty('left');
+    wrap.style.removeProperty('transform');
+    const M = SNAP_MARGIN;
+    if (corner === 'tl') { wrap.style.top = M+'px'; wrap.style.left = M+'px'; }
+    else if (corner === 'tr') { wrap.style.top = M+'px'; wrap.style.right = M+'px'; }
+    else if (corner === 'bl') { wrap.style.bottom = M+'px'; wrap.style.left = M+'px'; }
+    else                      { wrap.style.bottom = M+'px'; wrap.style.right = M+'px'; } // br (default)
+    // reapply panel direction
+    const panel = document.getElementById('fcwPanel');
+    if (panel) {
+      panel.style.removeProperty('left');
+      panel.style.removeProperty('right');
+      panel.style.removeProperty('top');
+      panel.style.removeProperty('bottom');
+      if (corner === 'tl' || corner === 'bl') { panel.style.left = '0'; panel.style.right = 'auto'; }
+      else { panel.style.right = '0'; panel.style.left = 'auto'; }
+      if (corner === 'tl' || corner === 'tr') { panel.style.top = '70px'; panel.style.bottom = 'auto'; }
+      else { panel.style.bottom = '70px'; panel.style.top = 'auto'; }
+    }
+  }
+
+  function onPointerDown(e) {
+    if (e.target.closest('.fcw-dismiss-btn')) return; // ignore dismiss btn
+    if (e.target.closest('.fcw-panel')) return;       // ignore panel
+    dragging = true; moved = false;
+    const touch = e.touches ? e.touches[0] : e;
+    startX = touch.clientX; startY = touch.clientY;
+    const rect = wrap.getBoundingClientRect();
+    startLeft = rect.left; startTop = rect.top;
+    wrap.style.transition = 'none';
+    e.preventDefault();
+  }
+  function onPointerMove(e) {
+    if (!dragging) return;
+    const touch = e.touches ? e.touches[0] : e;
+    const dx = touch.clientX - startX, dy = touch.clientY - startY;
+    if (Math.abs(dx) > 5 || Math.abs(dy) > 5) moved = true;
+    if (!moved) return;
+    wrap.style.position = 'fixed';
+    wrap.style.removeProperty('bottom'); wrap.style.removeProperty('right');
+    wrap.style.removeProperty('top');    wrap.style.removeProperty('left');
+    wrap.style.left = Math.max(0, Math.min(window.innerWidth  - wrap.offsetWidth,  startLeft + dx)) + 'px';
+    wrap.style.top  = Math.max(0, Math.min(window.innerHeight - wrap.offsetHeight, startTop  + dy)) + 'px';
+    e.preventDefault();
+  }
+  function onPointerUp(e) {
+    if (!dragging) return;
+    dragging = false;
+    if (!moved) {
+      // It was a tap/click — toggle
+      if (!e.target.closest('.fcw-dismiss-btn')) fcwToggle();
+      return;
+    }
+    // Snap to nearest corner
+    wrap.style.transition = '';
+    const rect = wrap.getBoundingClientRect();
+    const cx = rect.left + rect.width  / 2;
+    const cy = rect.top  + rect.height / 2;
+    const hw = window.innerWidth  / 2;
+    const hh = window.innerHeight / 2;
+    const corner = (cy < hh ? 't' : 'b') + (cx < hw ? 'l' : 'r');
+    localStorage.setItem('_fcw_corner', corner);
+    _fcwApplyCorner(corner);
+  }
+
+  fab.addEventListener('mousedown',  onPointerDown, { passive: false });
+  fab.addEventListener('touchstart', onPointerDown, { passive: false });
+  document.addEventListener('mousemove',  onPointerMove, { passive: false });
+  document.addEventListener('touchmove',  onPointerMove, { passive: false });
+  document.addEventListener('mouseup',  onPointerUp);
+  document.addEventListener('touchend', onPointerUp);
+})();
+
+// ── FAQ accordion ──
+function faqToggle(btn) {
+  const item   = btn.closest('.faq-item');
+  const answer = item.querySelector('.faq-a');
+  const arrow  = btn.querySelector('.faq-q-arrow');
+  const isOpen = item.classList.contains('open');
+  // Close all
+  document.querySelectorAll('.faq-item.open').forEach(el => {
+    el.classList.remove('open');
+    el.querySelector('.faq-a').style.maxHeight = '0';
+    el.querySelector('.faq-q-arrow').textContent = '+';
+  });
+  // Open clicked (if was closed)
+  if (!isOpen) {
+    item.classList.add('open');
+    answer.style.maxHeight = answer.scrollHeight + 'px';
+    arrow.textContent = '×';
+    item.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+}
+// Animate FAQ items on scroll
+const _faqObserver = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); _faqObserver.unobserve(e.target); } });
+}, { threshold: 0.12 });
+document.querySelectorAll('.faq-item').forEach((el, i) => {
+  el.style.transitionDelay = (i * 0.06) + 's';
+  _faqObserver.observe(el);
+});
+</script>
+</body>
+</html>

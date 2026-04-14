@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Вход — GULREZ</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/auth.css">
+</head>
+<body class="login-page">
+
+
+
+<div class="auth-card">
+
+  <div class="auth-logo">
+   
+    <span>GULREZ</span>
+  </div>
+
+  <h1 class="auth-title">Добро пожаловать</h1>
+  <p class="auth-sub">Войдите по логину или номеру телефона</p>
+
+  <div class="auth-error" id="authError"></div>
+
+  <form id="loginForm" novalidate>
+
+    <div class="auth-field">
+      <label class="auth-label">Логин или телефон</label>
+      <div class="auth-input-wrap">
+        <svg class="auth-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+        <input class="auth-input" id="loginField" type="text" placeholder="Ваш логин или +992 XXXXXXXXX" autocomplete="username">
+      </div>
+    </div>
+
+    <div class="auth-field">
+      <label class="auth-label">Пароль</label>
+      <div class="auth-input-wrap">
+        <svg class="auth-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        <input class="auth-input" id="passwordField" type="password" placeholder="Ваш пароль" autocomplete="current-password">
+        <button type="button" class="auth-eye" onclick="toggleEye()" aria-label="Показать пароль">
+          <svg id="eyeIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" width="18" height="18"><path d="M1 12S5 4 12 4s11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <button class="auth-btn" id="loginBtn" type="submit">Войти</button>
+  </form>
+
+  <p class="auth-switch">Нет аккаунта? <a href="/register.html">Зарегистрироваться</a></p>
+
+</div>
+
+<script>
+  let eyeOpen = true;
+  function toggleEye() {
+    const inp = document.getElementById('passwordField');
+    eyeOpen = !eyeOpen;
+    inp.type = eyeOpen ? 'password' : 'text';
+    document.getElementById('eyeIcon').innerHTML = eyeOpen
+      ? `<path d="M1 12S5 4 12 4s11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/>`
+      : `<path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/>`;
+  }
+
+  function showError(msg) {
+    const el = document.getElementById('authError');
+    el.textContent = msg;
+    el.classList.add('visible');
+  }
+
+  document.getElementById('loginForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    document.getElementById('authError').classList.remove('visible');
+
+    const login    = document.getElementById('loginField').value.trim();
+    const password = document.getElementById('passwordField').value;
+
+    if (!login)    return showError('Введите логин или номер телефона');
+    if (!password) return showError('Введите пароль');
+
+    const btn = document.getElementById('loginBtn');
+    btn.disabled = true;
+    btn.textContent = 'Вход...';
+
+    try {
+      const res  = await fetch('/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ login, password })
+      });
+      const data = await res.json();
+      if (res.ok && data.ok) {
+        if (data.role === 'admin') {
+          window.location.href = '/admin';
+        } else {
+          window.location.href = '/';
+        }
+      } else {
+        showError(data.error || 'Неверный логин или пароль');
+      }
+    } catch {
+      showError('Ошибка сети. Попробуйте ещё раз.');
+    } finally {
+      btn.disabled = false;
+      btn.textContent = 'Войти';
+    }
+  });
+</script>
+</body>
+</html>

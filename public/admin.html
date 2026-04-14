@@ -1,0 +1,1823 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Админ — GULREZ</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+
+<!-- ══════════════════════════════════
+     SIDEBAR
+══════════════════════════════════ -->
+<aside class="adm-sidebar" id="admSidebar">
+  <div class="adm-sidebar-header">
+    <img src="images/logo.png" alt="GULREZ" class="adm-logo">
+    <span class="adm-sidebar-title">GULREZ</span>
+    <button class="adm-sidebar-close" onclick="toggleSidebar()" id="sidebarCloseBtn">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" width="18" height="18"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+  </div>
+
+  <nav class="adm-nav">
+    <a class="adm-nav-item active" onclick="showPage('dashboard')" data-page="dashboard">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" width="18" height="18"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+      <span>Дашборд</span>
+    </a>
+    <a class="adm-nav-item" onclick="showPage('products')" data-page="products">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" width="18" height="18"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+      <span>Товары</span>
+      <span class="adm-nav-badge" id="navProductCount">0</span>
+    </a>
+    <a class="adm-nav-item" onclick="showPage('users')" data-page="users">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" width="18" height="18"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+      <span>Пользователи</span>
+    </a>
+    <a class="adm-nav-item" onclick="showPage('media')" data-page="media">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" width="18" height="18"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+      <span>Медиатека</span>
+      <span class="adm-nav-badge adm-nav-badge--warn" id="navMediaBadge" style="display:none">0</span>
+    </a>
+    <a class="adm-nav-item" onclick="showPage('hero')" data-page="hero">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" width="18" height="18"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+      <span>Слайдер</span>
+    </a>
+    <a class="adm-nav-item" onclick="showPage('chat')" data-page="chat">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" width="18" height="18"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+      <span>Чат поддержка</span>
+      <span class="adm-nav-badge adm-nav-badge--warn" id="navChatBadge" style="display:none">0</span>
+    </a>
+    <a class="adm-nav-item" onclick="showPage('settings')" data-page="settings">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" width="18" height="18"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+      <span>Настройки</span>
+    </a>
+  </nav>
+
+  <div class="adm-sidebar-footer">
+    <div class="adm-user-pill">
+      <div class="adm-user-pill-avatar-wrap" id="sidebarAvatarWrap" onclick="document.getElementById('adminAvatarInput').click()" title="Сменить аватарку">
+        <div class="adm-user-pill-avatar" id="sidebarAvatar">M</div>
+        <div class="adm-avatar-cam-overlay">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" width="13" height="13"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+        </div>
+        <input type="file" id="adminAvatarInput" accept="image/*" style="display:none" onchange="adminUploadAvatar(this)">
+      </div>
+      <span class="adm-user-pill-name" id="sidebarUsername">...</span>
+    </div>
+    <div class="adm-sidebar-actions">
+      <a href="/" target="_blank" class="adm-sidebar-action-btn" title="Открыть сайт">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" width="16" height="16"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+      </a>
+      <button class="adm-sidebar-action-btn adm-logout-btn" onclick="adminLogout()" title="Выйти">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" width="16" height="16"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+      </button>
+    </div>
+  </div>
+</aside>
+
+<!-- Sidebar overlay (mobile) -->
+<div class="adm-sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
+
+<!-- ══════════════════════════════════
+     MAIN LAYOUT
+══════════════════════════════════ -->
+<div class="adm-layout">
+
+  <!-- Top bar (mobile) -->
+  <header class="adm-topbar">
+    <button class="adm-burger" onclick="toggleSidebar()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" width="20" height="20"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+    <span class="adm-topbar-title" id="topbarTitle">Дашборд</span>
+    <div class="adm-clock-pill" id="clockPill">
+      <span class="adm-clock-day" id="clockDay"></span>
+      <span class="adm-clock-sep"></span>
+      <span class="adm-clock-time" id="clockTime"></span>
+    </div>
+  </header>
+
+  <main class="adm-content">
+
+    <!-- ══ DASHBOARD PAGE ══ -->
+    <div id="page-dashboard" class="adm-page active">
+      <div class="adm-page-header">
+        <h1 class="adm-page-title">Дашборд</h1>
+        <p class="adm-page-sub">Общая статистика магазина</p>
+      </div>
+
+      <div class="adm-stats-grid">
+        <div class="adm-stat-card">
+          <div class="adm-stat-icon adm-stat-blue">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" width="22" height="22"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+          </div>
+          <div class="adm-stat-body">
+            <span class="adm-stat-value" id="statTotal">—</span>
+            <span class="adm-stat-label">Всего товаров</span>
+          </div>
+        </div>
+        <div class="adm-stat-card">
+          <div class="adm-stat-icon adm-stat-green">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" width="22" height="22"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <div class="adm-stat-body">
+            <span class="adm-stat-value" id="statActive">—</span>
+            <span class="adm-stat-label">Активных</span>
+          </div>
+        </div>
+        <div class="adm-stat-card">
+          <div class="adm-stat-icon adm-stat-orange">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" width="22" height="22"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          </div>
+          <div class="adm-stat-body">
+            <span class="adm-stat-value" id="statInactive">—</span>
+            <span class="adm-stat-label">Отключённых</span>
+          </div>
+        </div>
+        <div class="adm-stat-card">
+          <div class="adm-stat-icon adm-stat-purple">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" width="22" height="22"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          </div>
+          <div class="adm-stat-body">
+            <span class="adm-stat-value" id="statUsers">—</span>
+            <span class="adm-stat-label">Администраторов</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="adm-quick-actions">
+        <h2 class="adm-section-title">Быстрые действия</h2>
+        <div class="adm-quick-grid">
+          <button class="adm-quick-btn" onclick="showPage('products'); openProductModal()">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" width="24" height="24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            Добавить товар
+          </button>
+          <button class="adm-quick-btn" onclick="showPage('products')">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" width="24" height="24"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+            Управление товарами
+          </button>
+          <button class="adm-quick-btn" onclick="showPage('users')">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" width="24" height="24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+            Пользователи
+          </button>
+          <button class="adm-quick-btn" onclick="showPage('hero')">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" width="24" height="24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+            Слайдер
+          </button>
+          <button class="adm-quick-btn" onclick="showPage('settings')">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" width="24" height="24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+            Сменить пароль
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ PRODUCTS PAGE ══ -->
+    <div id="page-products" class="adm-page">
+      <div class="adm-page-header">
+        <div>
+          <h1 class="adm-page-title">Товары <span class="adm-count-badge" id="admCount">0</span></h1>
+          <p class="adm-page-sub">Управление каталогом</p>
+        </div>
+        <button class="adm-btn adm-btn-primary" onclick="openProductModal()">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" width="15" height="15"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          Добавить
+        </button>
+      </div>
+
+      <div class="adm-table-wrap">
+        <table class="adm-table" id="admTable">
+          <thead>
+            <tr>
+              <th class="adm-th-num">№</th>
+              <th class="adm-th-pos">Поз.</th>
+              <th class="adm-th-photo">Фото</th>
+              <th>Название</th>
+              <th>Цена</th>
+              <th>Скидка</th>
+              <th>Статус</th>
+              <th class="adm-th-actions">Действия</th>
+            </tr>
+          </thead>
+          <tbody id="admTableBody">
+            <tr><td colspan="8" class="adm-loading">Загрузка...</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ══ USERS PAGE ══ -->
+    <div id="page-users" class="adm-page">
+      <div class="adm-page-header">
+        <div>
+          <h1 class="adm-page-title">Пользователи</h1>
+          <p class="adm-page-sub">Администраторы системы</p>
+        </div>
+        <button class="adm-btn adm-btn-primary" onclick="openUserModal()">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" width="15" height="15"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          Добавить
+        </button>
+      </div>
+
+      <div class="adm-table-wrap">
+        <table class="adm-table">
+          <thead>
+            <tr>
+              <th style="width:44px">№</th>
+              <th>Логин</th>
+              <th>Роль</th>
+              <th>Дата создания</th>
+              <th style="width:80px">Действия</th>
+            </tr>
+          </thead>
+          <tbody id="usersTableBody">
+            <tr><td colspan="5" class="adm-loading">Загрузка...</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ══ CHAT PAGE ══ -->
+    <div id="page-chat" class="adm-page">
+      <div class="adm-page-header">
+        <h1 class="adm-page-title">Чат поддержка</h1>
+        <p class="adm-page-sub">Переписка с клиентами и управление триггерами</p>
+      </div>
+
+      <!-- Tabs -->
+      <div class="adm-chat-tabs">
+        <button class="adm-chat-tab active" onclick="switchChatTab('conversations',this)">💬 Разговоры</button>
+        <button class="adm-chat-tab" onclick="switchChatTab('triggers',this)">⚡ Триггеры</button>
+        <button class="adm-chat-tab" onclick="switchChatTab('widget',this)">⚙️ Виджет</button>
+      </div>
+
+      <!-- CONVERSATIONS tab -->
+      <div id="chatTabConversations" class="adm-chat-tab-content">
+        <div class="adm-chat-layout">
+          <!-- Sessions list -->
+          <div class="adm-chat-sessions" id="chatSessionsList">
+            <div class="adm-chat-sessions-empty">Нет сообщений</div>
+          </div>
+          <!-- Conversation view -->
+          <div class="adm-chat-conv" id="chatConvPanel">
+            <div class="adm-chat-conv-empty">Выберите разговор слева</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TRIGGERS tab -->
+      <div id="chatTabTriggers" class="adm-chat-tab-content" style="display:none">
+        <div class="adm-triggers-header">
+          <button class="adm-btn adm-btn-primary" onclick="openTriggerModal()">+ Новый триггер</button>
+        </div>
+        <div id="triggersList" class="adm-triggers-list"></div>
+      </div>
+
+      <!-- WIDGET SETTINGS tab -->
+      <div id="chatTabWidget" class="adm-chat-tab-content" style="display:none">
+        <div class="adm-widget-settings">
+
+          <div class="adm-widget-card">
+            <div class="adm-widget-card-header">
+              <div class="adm-widget-card-icon">💬</div>
+              <div>
+                <div class="adm-widget-card-title">Показывать чат на сайте</div>
+                <div class="adm-widget-card-desc">Если выключено — виджет чата полностью скрыт для всех посетителей</div>
+              </div>
+            </div>
+            <label class="adm-toggle-switch">
+              <input type="checkbox" id="widgetChatEnabled" onchange="saveWidgetSettings()">
+              <span class="adm-toggle-track"></span>
+            </label>
+          </div>
+
+          <div class="adm-widget-card">
+            <div class="adm-widget-card-header">
+              <div class="adm-widget-card-icon">📍</div>
+              <div>
+                <div class="adm-widget-card-title">Позиция на экране</div>
+                <div class="adm-widget-card-desc">По умолчанию — правый нижний угол. Посетитель также может перетащить кнопку сам.</div>
+              </div>
+            </div>
+            <div class="adm-widget-pos-grid" id="widgetPosGrid">
+              <button class="adm-pos-btn" data-corner="tl" onclick="setWidgetCorner('tl',this)">↖ Лево сверху</button>
+              <button class="adm-pos-btn" data-corner="tr" onclick="setWidgetCorner('tr',this)">↗ Право сверху</button>
+              <button class="adm-pos-btn" data-corner="bl" onclick="setWidgetCorner('bl',this)">↙ Лево снизу</button>
+              <button class="adm-pos-btn active" data-corner="br" onclick="setWidgetCorner('br',this)">↘ Право снизу</button>
+            </div>
+          </div>
+
+          <div class="adm-widget-save-row">
+            <span class="adm-widget-saved" id="widgetSavedMsg" style="display:none">✓ Сохранено</span>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ══ SETTINGS PAGE ══ -->
+    <div id="page-settings" class="adm-page">
+      <div class="adm-page-header">
+        <div>
+          <h1 class="adm-page-title">Настройки</h1>
+          <p class="adm-page-sub">Управление аккаунтом</p>
+        </div>
+      </div>
+
+      <div class="adm-settings-card">
+        <div class="adm-settings-section">
+          <h2 class="adm-section-title">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" width="18" height="18"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+            Сменить пароль
+          </h2>
+          <div class="adm-settings-form">
+            <div class="adm-field">
+              <label>Текущий пароль</label>
+              <input type="password" id="curPassword" placeholder="Введите текущий пароль">
+            </div>
+            <div class="adm-field">
+              <label>Новый пароль</label>
+              <input type="password" id="newPassword" placeholder="Минимум 4 символа">
+            </div>
+            <div class="adm-field">
+              <label>Повторите новый пароль</label>
+              <input type="password" id="newPassword2" placeholder="Повторите пароль">
+            </div>
+            <button class="adm-btn adm-btn-primary" onclick="changePassword()">
+              Сохранить пароль
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ MEDIA PAGE ══ -->
+    <div id="page-media" class="adm-page">
+      <div class="adm-page-header">
+        <div>
+          <h1 class="adm-page-title">Медиатека</h1>
+          <p class="adm-page-sub">Все изображения в хранилище</p>
+        </div>
+        <button class="adm-btn adm-btn-danger" onclick="deleteAllUnused()" id="deleteUnusedBtn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" width="14" height="14"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/></svg>
+          Удалить неиспользуемые
+        </button>
+      </div>
+
+      <!-- Stats bar -->
+      <div class="media-stats-bar">
+        <div class="media-stat-card">
+          <span class="media-stat-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" width="18" height="18"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+          </span>
+          <span class="media-stat-value" id="mediaStatTotal">—</span>
+          <span class="media-stat-label">файлов</span>
+        </div>
+        <div class="media-stat-card">
+          <span class="media-stat-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" width="18" height="18"><path d="M22 12H2"/><path d="M5.45 5.11L2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"/><line x1="6" y1="16" x2="6.01" y2="16"/><line x1="10" y1="16" x2="10.01" y2="16"/></svg>
+          </span>
+          <span class="media-stat-value" id="mediaStatSize">—</span>
+          <span class="media-stat-label">занято</span>
+        </div>
+        <div class="media-stat-card media-stat-card--warn">
+          <span class="media-stat-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" width="18" height="18"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          </span>
+          <span class="media-stat-value" id="mediaStatUnused">—</span>
+          <span class="media-stat-label">неиспользуемых</span>
+        </div>
+        <div class="media-stat-card media-stat-card--warn">
+          <span class="media-stat-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" width="18" height="18"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/></svg>
+          </span>
+          <span class="media-stat-value" id="mediaStatUnusedSize">—</span>
+          <span class="media-stat-label">можно освободить</span>
+        </div>
+      </div>
+
+      <!-- Toolbar -->
+      <div class="media-toolbar">
+        <div class="media-filter-tabs">
+          <button class="media-filter-tab active" onclick="filterMedia('all',this)">Все</button>
+          <button class="media-filter-tab" onclick="filterMedia('used',this)">Используемые</button>
+          <button class="media-filter-tab" onclick="filterMedia('unused',this)">
+            Неиспользуемые
+            <span class="media-filter-count" id="mediaUnusedCount"></span>
+          </button>
+        </div>
+        <div class="media-sort-wrap">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" width="14" height="14"><line x1="3" y1="6" x2="21" y2="6"/><line x1="6" y1="12" x2="18" y2="12"/><line x1="9" y1="18" x2="15" y2="18"/></svg>
+          <select id="mediaSortSelect" onchange="sortAndRenderMedia()">
+            <option value="date-desc">Новые сначала</option>
+            <option value="date-asc">Старые сначала</option>
+            <option value="size-desc">Большие сначала</option>
+            <option value="size-asc">Маленькие сначала</option>
+            <option value="name-asc">По имени А→Я</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Image grid -->
+      <div class="media-grid" id="mediaGrid">
+        <div class="media-loading-state">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" width="32" height="32"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+          <span>Загрузка...</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ HERO / SLIDER PAGE ══ -->
+    <div id="page-hero" class="adm-page">
+      <div class="adm-page-header">
+        <div>
+          <h1 class="adm-page-title">Слайдер главной страницы</h1>
+          <p class="adm-page-sub">Фотографии и цитаты для каждого слайда</p>
+        </div>
+        <button class="adm-btn adm-btn-primary" onclick="saveHero()">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" width="15" height="15"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+          Сохранить всё
+        </button>
+      </div>
+
+      <!-- Lang tabs -->
+      <div class="hero-lang-tabs" id="heroLangTabs">
+        <button class="hero-lang-tab active" onclick="switchHeroLang('RU',this)">🇷🇺 RU</button>
+        <button class="hero-lang-tab" onclick="switchHeroLang('EN',this)">🇬🇧 EN</button>
+        <button class="hero-lang-tab" onclick="switchHeroLang('TJ',this)">🇹🇯 TJ</button>
+      </div>
+
+      <!-- Slide cards -->
+      <div class="hero-slides-grid" id="heroSlidesGrid">
+        <!-- Rendered by JS -->
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<!-- ══ PRODUCT MODAL ══ -->
+<div class="adm-overlay" id="productModal" onclick="closeProductModal(event)">
+  <div class="adm-modal" onclick="event.stopPropagation()">
+    <div class="adm-modal-header">
+      <h2 id="modalTitle">Новый товар</h2>
+      <button class="adm-modal-close" onclick="closeProductModal()">
+        <svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" fill="none" width="18" height="18"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="adm-modal-body">
+      <input type="hidden" id="editProductId">
+
+      <!-- Language tabs for translatable fields -->
+      <div class="hero-lang-tabs" id="prodLangTabs" style="margin-bottom:16px">
+        <button class="hero-lang-tab active" onclick="switchProdLang('RU',this)">🇷🇺 RU</button>
+        <button class="hero-lang-tab" onclick="switchProdLang('EN',this)">🇬🇧 EN</button>
+        <button class="hero-lang-tab" onclick="switchProdLang('TJ',this)">🇹🇯 TJ</button>
+      </div>
+      <p id="prodLangHint" style="font-size:12px;color:var(--adm-muted);margin:-8px 0 14px;display:none">
+        Если не заполнено — будет использоваться русский вариант
+      </p>
+
+      <div class="adm-form-grid">
+        <div class="adm-form-col">
+
+          <!-- RU panel (base, required) -->
+          <div id="prodPanel-RU">
+            <div class="adm-field">
+              <label>Название <span class="adm-required">*</span></label>
+              <input type="text" id="fName" placeholder="Красные тюльпаны">
+            </div>
+            <div class="adm-field">
+              <label>Описание <span class="adm-required">*</span></label>
+              <textarea id="fDesc" rows="2" placeholder="Краткое описание..."></textarea>
+            </div>
+            <div class="adm-field-row">
+              <div class="adm-field">
+                <label>Состав <span class="adm-required">*</span></label>
+                <input type="text" id="fComposition" placeholder="15 тюльпанов">
+              </div>
+              <div class="adm-field">
+                <label>Размер <span class="adm-required">*</span></label>
+                <input type="text" id="fSize" placeholder="30 × 55 см">
+              </div>
+            </div>
+            <div class="adm-field-row">
+              <div class="adm-field">
+                <label>Цвет</label>
+                <input type="text" id="fColor" placeholder="Красный">
+              </div>
+              <div class="adm-field">
+                <label>Тег</label>
+                <input type="text" id="fTag" placeholder="Хит">
+              </div>
+            </div>
+          </div>
+
+          <!-- EN panel (optional overrides) -->
+          <div id="prodPanel-EN" style="display:none">
+            <div class="adm-field">
+              <label>Name (EN)</label>
+              <input type="text" id="fNameEN" placeholder="Red Tulips">
+            </div>
+            <div class="adm-field">
+              <label>Description (EN)</label>
+              <textarea id="fDescEN" rows="2" placeholder="Short description..."></textarea>
+            </div>
+            <div class="adm-field-row">
+              <div class="adm-field">
+                <label>Composition (EN)</label>
+                <input type="text" id="fCompositionEN" placeholder="15 tulips">
+              </div>
+              <div class="adm-field">
+                <label>Size (EN)</label>
+                <input type="text" id="fSizeEN" placeholder="12 × 22 in">
+              </div>
+            </div>
+            <div class="adm-field-row">
+              <div class="adm-field">
+                <label>Color (EN)</label>
+                <input type="text" id="fColorEN" placeholder="Red">
+              </div>
+              <div class="adm-field">
+                <label>Tag (EN)</label>
+                <input type="text" id="fTagEN" placeholder="Hit">
+              </div>
+            </div>
+          </div>
+
+          <!-- TJ panel (optional overrides) -->
+          <div id="prodPanel-TJ" style="display:none">
+            <div class="adm-field">
+              <label>Ном (TJ)</label>
+              <input type="text" id="fNameTJ" placeholder="Лолаҳои сурх">
+            </div>
+            <div class="adm-field">
+              <label>Тавсиф (TJ)</label>
+              <textarea id="fDescTJ" rows="2" placeholder="Тавсифи кӯтоҳ..."></textarea>
+            </div>
+            <div class="adm-field-row">
+              <div class="adm-field">
+                <label>Таркиб (TJ)</label>
+                <input type="text" id="fCompositionTJ" placeholder="15 лола">
+              </div>
+              <div class="adm-field">
+                <label>Андоза (TJ)</label>
+                <input type="text" id="fSizeTJ" placeholder="30 × 55 см">
+              </div>
+            </div>
+            <div class="adm-field-row">
+              <div class="adm-field">
+                <label>Ранг (TJ)</label>
+                <input type="text" id="fColorTJ" placeholder="Сурх">
+              </div>
+              <div class="adm-field">
+                <label>Тег (TJ)</label>
+                <input type="text" id="fTagTJ" placeholder="Хит">
+              </div>
+            </div>
+          </div>
+
+          <!-- Always-visible fields (not translatable) -->
+          <div class="adm-field-row" style="margin-top:8px">
+            <div class="adm-field">
+              <label>Цена (TJS) <span class="adm-required">*</span></label>
+              <input type="number" id="fPrice" min="0" step="1" placeholder="200">
+            </div>
+            <div class="adm-field">
+              <label>Скидка (%)</label>
+              <input type="number" id="fDiscount" min="0" max="99" step="1" value="0">
+            </div>
+          </div>
+          <div class="adm-field-row">
+            <div class="adm-field">
+              <label>Цвет тега</label>
+              <div class="adm-tag-color-row">
+                <input type="text" id="fTagBg" placeholder="var(--rose)">
+                <input type="color" id="fTagBgPicker" value="#c4a0a0" oninput="document.getElementById('fTagBg').value=this.value">
+              </div>
+            </div>
+            <div class="adm-field">
+              <label>Позиция</label>
+              <input type="number" id="fSortOrder" min="0" step="1" value="0">
+            </div>
+          </div>
+          <div class="adm-field">
+            <label>Статус</label>
+            <div class="adm-toggle-row">
+              <label class="adm-toggle">
+                <input type="checkbox" id="fStatus" checked>
+                <span class="adm-toggle-slider"></span>
+              </label>
+              <span id="fStatusLabel">Активен</span>
+            </div>
+          </div>
+        </div>
+        <div class="adm-form-col">
+          <p class="adm-images-label">Фотографии <small>(до 3 штук)</small></p>
+          <div class="adm-img-slot">
+            <div class="adm-img-preview" id="imgPreview1"><span class="adm-img-placeholder">Фото 1</span></div>
+            <div class="adm-img-controls">
+              <input type="text" id="fImage1" placeholder="images/5.jpg" oninput="previewImg(1)">
+              <label class="adm-upload-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" width="14" height="14"><polyline points="16 16 12 12 8 16"/><line x1="12" y1="12" x2="12" y2="21"/><path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3"/></svg><input type="file" accept="image/*" onchange="uploadImg(this,1)" style="display:none"></label>
+            </div>
+          </div>
+          <div class="adm-img-slot">
+            <div class="adm-img-preview" id="imgPreview2"><span class="adm-img-placeholder">Фото 2</span></div>
+            <div class="adm-img-controls">
+              <input type="text" id="fImage2" placeholder="images/6.jpg" oninput="previewImg(2)">
+              <label class="adm-upload-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" width="14" height="14"><polyline points="16 16 12 12 8 16"/><line x1="12" y1="12" x2="12" y2="21"/><path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3"/></svg><input type="file" accept="image/*" onchange="uploadImg(this,2)" style="display:none"></label>
+            </div>
+          </div>
+          <div class="adm-img-slot">
+            <div class="adm-img-preview" id="imgPreview3"><span class="adm-img-placeholder">Фото 3</span></div>
+            <div class="adm-img-controls">
+              <input type="text" id="fImage3" placeholder="images/7.jpg" oninput="previewImg(3)">
+              <label class="adm-upload-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" width="14" height="14"><polyline points="16 16 12 12 8 16"/><line x1="12" y1="12" x2="12" y2="21"/><path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3"/></svg><input type="file" accept="image/*" onchange="uploadImg(this,3)" style="display:none"></label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="adm-modal-footer">
+      <button class="adm-btn adm-btn-ghost" onclick="closeProductModal()">Отмена</button>
+      <button class="adm-btn adm-btn-primary" id="saveProductBtn" onclick="saveProduct()">Сохранить</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ USER MODAL ══ -->
+<div class="adm-overlay" id="userModal" onclick="closeUserModal(event)">
+  <div class="adm-confirm" onclick="event.stopPropagation()" style="max-width:420px">
+    <h3 style="margin-bottom:20px;text-align:left;font-size:17px">Новый пользователь</h3>
+    <div class="adm-field" style="margin-bottom:12px;text-align:left">
+      <label>Логин</label>
+      <input type="text" id="uLogin" placeholder="Введите логин">
+    </div>
+    <div class="adm-field" style="margin-bottom:12px;text-align:left">
+      <label>Пароль</label>
+      <input type="password" id="uPassword" placeholder="Минимум 4 символа">
+    </div>
+    <div class="adm-confirm-btns" style="margin-top:20px">
+      <button class="adm-btn adm-btn-ghost" onclick="closeUserModal()">Отмена</button>
+      <button class="adm-btn adm-btn-primary" id="saveUserBtn" onclick="saveUser()">Создать</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ DELETE CONFIRM ══ -->
+<div class="adm-overlay" id="deleteModal" onclick="closeDeleteModal(event)">
+  <div class="adm-confirm" onclick="event.stopPropagation()">
+    <div class="adm-confirm-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="var(--adm-danger)" stroke-width="2" stroke-linecap="round" width="32" height="32"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/></svg>
+    </div>
+    <h3>Удалить товар?</h3>
+    <p id="deleteProductName" class="adm-confirm-name"></p>
+    <p class="adm-confirm-sub">Это действие необратимо.</p>
+    <div class="adm-confirm-btns">
+      <button class="adm-btn adm-btn-ghost" onclick="closeDeleteModal()">Отмена</button>
+      <button class="adm-btn adm-btn-danger" id="confirmDeleteBtn" onclick="confirmDelete()">Удалить</button>
+    </div>
+  </div>
+</div>
+
+<div class="adm-toast" id="admToast"></div>
+
+<script>
+/* ══════════════════════════════════════════
+   ADMIN PANEL — FULL SCRIPT
+══════════════════════════════════════════ */
+
+let allProducts = [];
+let deleteTargetId = null;
+
+// ── Tajikistan Clock (UTC+5) ──
+function startClock() {
+  const DAYS_RU = ['Вс', 'Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб'];
+  const DAY_FULL = ['Воскресенье','Понедельник','Вторник','Среда','Четверг','Пятница','Суббота'];
+  function tick() {
+    const now = new Date();
+    // UTC+5 = Dushanbe
+    const utc = now.getTime() + now.getTimezoneOffset() * 60000;
+    const tj  = new Date(utc + 5 * 3600000);
+    const h   = String(tj.getHours()).padStart(2, '0');
+    const m   = String(tj.getMinutes()).padStart(2, '0');
+    const s   = String(tj.getSeconds()).padStart(2, '0');
+    const d   = tj.getDay();
+    document.getElementById('clockDay').textContent  = DAYS_RU[d];
+    document.getElementById('clockTime').textContent = `${h}:${m}:${s}`;
+    document.getElementById('clockPill').title = DAY_FULL[d] + ', Душанбе TJ UTC+5';
+    // pulse colon blink
+    const sep = document.getElementById('clockTime');
+    sep.style.opacity = tj.getSeconds() % 2 === 0 ? '1' : '0.6';
+  }
+  tick();
+  setInterval(tick, 1000);
+}
+
+// ── Avatar helpers ──
+function _setAdminAvatar(avatarUrl, login) {
+  const el = document.getElementById('sidebarAvatar');
+  if (avatarUrl) {
+    el.innerHTML = `<img src="/${avatarUrl}" alt="${login}" style="width:100%;height:100%;object-fit:cover;border-radius:50%;">`;
+    el.classList.add('has-avatar');
+  } else {
+    el.textContent = login.charAt(0).toUpperCase();
+    el.classList.remove('has-avatar');
+  }
+}
+
+async function adminUploadAvatar(input) {
+  const file = input.files[0];
+  if (!file) return;
+  if (file.size > 4 * 1024 * 1024) { toast('Максимальный размер — 4 МБ', 'error'); input.value = ''; return; }
+  const wrap = document.getElementById('sidebarAvatarWrap');
+  wrap.classList.add('uploading');
+  const fd = new FormData();
+  fd.append('avatar', file);
+  try {
+    const res  = await fetch('/api/user/avatar', { method: 'POST', body: fd });
+    const data = await res.json();
+    if (data.ok) {
+      _setAdminAvatar(data.avatar, document.getElementById('sidebarUsername').textContent);
+      toast('Аватар обновлён!', 'success');
+    } else { toast(data.error || 'Ошибка', 'error'); }
+  } catch { toast('Ошибка сети', 'error'); }
+  finally { wrap.classList.remove('uploading'); input.value = ''; }
+}
+
+// ── Init ──
+(async function init() {
+  const me = await apiFetch('/api/me');
+  if (!me || !me.loggedIn) { location.href = '/login.html'; return; }
+
+  document.getElementById('sidebarUsername').textContent = me.login;
+  _setAdminAvatar(me.avatar, me.login);
+
+  startClock();
+  loadProducts();
+  loadStats();
+})();
+
+// ── Page routing ──
+function showPage(page) {
+  document.querySelectorAll('.adm-page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.adm-nav-item').forEach(n => n.classList.remove('active'));
+  document.getElementById('page-' + page).classList.add('active');
+  document.querySelector(`[data-page="${page}"]`).classList.add('active');
+
+  const titles = { dashboard: 'Дашборд', products: 'Товары', users: 'Пользователи', media: 'Медиатека', hero: 'Слайдер', settings: 'Настройки' };
+  document.getElementById('topbarTitle').textContent = titles[page] || '';
+
+  if (page === 'users') loadUsers();
+  if (page === 'dashboard') loadStats();
+  if (page === 'media') loadMedia();
+  if (page === 'hero') loadHero();
+
+  // Close sidebar on mobile after nav
+  if (window.innerWidth < 768) closeSidebar();
+}
+
+// ── Sidebar ──
+function toggleSidebar() {
+  document.getElementById('admSidebar').classList.toggle('open');
+  document.getElementById('sidebarOverlay').classList.toggle('open');
+}
+function closeSidebar() {
+  document.getElementById('admSidebar').classList.remove('open');
+  document.getElementById('sidebarOverlay').classList.remove('open');
+}
+
+// ── Stats ──
+async function loadStats() {
+  const s = await apiFetch('/api/admin/stats');
+  if (!s) return;
+  document.getElementById('statTotal').textContent    = s.total;
+  document.getElementById('statActive').textContent   = s.active;
+  document.getElementById('statInactive').textContent = s.inactive;
+  document.getElementById('statUsers').textContent    = s.users;
+}
+
+// ── Products ──
+async function loadProducts() {
+  const products = await apiFetch('/api/admin/products');
+  if (!products) return;
+  allProducts = products;
+  document.getElementById('admCount').textContent      = products.length;
+  document.getElementById('navProductCount').textContent = products.length;
+  renderTable(products);
+}
+
+function renderTable(products) {
+  const tbody = document.getElementById('admTableBody');
+  if (!products.length) {
+    tbody.innerHTML = '<tr><td colspan="8" class="adm-empty">Нет товаров — нажмите «Добавить»</td></tr>';
+    return;
+  }
+  tbody.innerHTML = products.map((p, i) => {
+    const disc = p.discount > 0;
+    const dp   = disc ? Math.round(p.price * (1 - p.discount / 100)) : p.price;
+    const priceHtml = disc
+      ? `<span class="adm-old-price">${p.price}</span> <span class="adm-new-price">${dp}</span> TJS`
+      : `<span class="adm-price">${p.price} TJS</span>`;
+    const discHtml = disc
+      ? `<span class="adm-discount-badge">-${p.discount}%</span>`
+      : `<span class="adm-no-discount">—</span>`;
+    const statusHtml = `
+      <label class="adm-toggle">
+        <input type="checkbox" ${p.status ? 'checked' : ''} onchange="toggleStatus(${p.id},this)">
+        <span class="adm-toggle-slider"></span>
+      </label>
+      <span class="adm-status-label ${p.status ? 'adm-active' : 'adm-inactive'}">${p.status ? 'Активен' : 'Выкл'}</span>`;
+    return `
+      <tr class="${p.status ? '' : 'adm-row-inactive'}" data-id="${p.id}">
+        <td class="adm-td-num">${i+1}</td>
+        <td class="adm-td-pos"><span class="adm-sort-badge">#${p.sort_order}</span></td>
+        <td class="adm-td-photo"><img src="${p.images[0]}" class="adm-thumb" onerror="this.src='images/logo.png'"></td>
+        <td class="adm-td-name">
+          <div class="adm-product-name">${escHtml(p.title)}</div>
+          ${p.tag ? `<span class="adm-tag-mini" style="background:${p.tagBg}">${escHtml(p.tag)}</span>` : ''}
+        </td>
+        <td class="adm-td-price">${priceHtml}</td>
+        <td class="adm-td-discount">${discHtml}</td>
+        <td class="adm-td-status">${statusHtml}</td>
+        <td class="adm-td-actions">
+          <button class="adm-action-btn adm-edit-btn" onclick="openProductModal(${p.id})" title="Изменить">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" width="15" height="15"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+          </button>
+          <button class="adm-action-btn adm-delete-btn" onclick="openDeleteModal(${p.id},'${escHtml(p.title)}')" title="Удалить">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" width="15" height="15"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/></svg>
+          </button>
+        </td>
+      </tr>`;
+  }).join('');
+}
+
+// ── Users ──
+async function loadUsers() {
+  const users = await apiFetch('/api/admin/users');
+  if (!users) return;
+  const tbody = document.getElementById('usersTableBody');
+  if (!users.length) {
+    tbody.innerHTML = '<tr><td colspan="5" class="adm-empty">Нет пользователей</td></tr>';
+    return;
+  }
+  tbody.innerHTML = users.map((u, i) => `
+    <tr>
+      <td class="adm-td-num">${i+1}</td>
+      <td>
+        <div style="display:flex;align-items:center;gap:8px">
+          <div style="width:30px;height:30px;border-radius:50%;background:linear-gradient(135deg,#c4a0a0,#8b6f5e);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;flex-shrink:0">${escHtml(u.login.charAt(0).toUpperCase())}</div>
+          <strong>${escHtml(u.login)}</strong>
+        </div>
+      </td>
+      <td><span class="adm-tag-mini" style="background:#8b6f5e">${escHtml(u.role)}</span></td>
+      <td style="color:var(--adm-muted);font-size:12px">${new Date(u.created_at).toLocaleDateString('ru-RU')}</td>
+      <td class="adm-td-actions">
+        <button class="adm-action-btn adm-delete-btn" onclick="deleteUser(${u.id},'${escHtml(u.login)}')" title="Удалить">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" width="15" height="15"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/></svg>
+        </button>
+      </td>
+    </tr>`).join('');
+}
+
+function openUserModal() {
+  document.getElementById('uLogin').value = '';
+  document.getElementById('uPassword').value = '';
+  document.getElementById('userModal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeUserModal(e) {
+  if (e && e.target !== document.getElementById('userModal')) return;
+  document.getElementById('userModal').classList.remove('open');
+  document.body.style.overflow = '';
+}
+async function saveUser() {
+  const login    = document.getElementById('uLogin').value.trim();
+  const password = document.getElementById('uPassword').value;
+  if (!login)    { toast('Введите логин', 'error'); return; }
+  if (!password) { toast('Введите пароль', 'error'); return; }
+  const btn = document.getElementById('saveUserBtn');
+  btn.disabled = true; btn.textContent = 'Создание...';
+  try {
+    const r = await apiFetch('/api/admin/users', { method: 'POST', body: JSON.stringify({ login, password, role: 'admin' }) });
+    if (r && r.id) {
+      toast('Пользователь создан', 'success');
+      closeUserModal();
+      loadUsers();
+      loadStats();
+    }
+  } finally { btn.disabled = false; btn.textContent = 'Создать'; }
+}
+async function deleteUser(id, name) {
+  if (!confirm(`Удалить пользователя «${name}»?`)) return;
+  const r = await apiFetch(`/api/admin/users/${id}`, { method: 'DELETE' });
+  if (r && r.ok) { toast('Пользователь удалён', 'success'); loadUsers(); loadStats(); }
+}
+
+// ── Change password ──
+async function changePassword() {
+  const cur  = document.getElementById('curPassword').value;
+  const nw   = document.getElementById('newPassword').value;
+  const nw2  = document.getElementById('newPassword2').value;
+  if (!cur || !nw || !nw2) { toast('Заполните все поля', 'error'); return; }
+  if (nw !== nw2) { toast('Пароли не совпадают', 'error'); return; }
+  if (nw.length < 4) { toast('Минимум 4 символа', 'error'); return; }
+  const r = await apiFetch('/api/admin/change-password', { method: 'POST', body: JSON.stringify({ currentPassword: cur, newPassword: nw }) });
+  if (r && r.ok) {
+    toast('Пароль изменён!', 'success');
+    document.getElementById('curPassword').value = '';
+    document.getElementById('newPassword').value = '';
+    document.getElementById('newPassword2').value = '';
+  }
+}
+
+// ── Product modal ──
+// Language tab switching for product modal
+function switchProdLang(lang, btn) {
+  ['RU','EN','TJ'].forEach(l => {
+    const panel = document.getElementById(`prodPanel-${l}`);
+    if (panel) panel.style.display = l === lang ? '' : 'none';
+  });
+  document.querySelectorAll('#prodLangTabs .hero-lang-tab').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  const hint = document.getElementById('prodLangHint');
+  if (hint) hint.style.display = lang !== 'RU' ? '' : 'none';
+}
+
+async function openProductModal(id) {
+  clearForm();
+  // Reset to RU tab
+  switchProdLang('RU', document.querySelector('#prodLangTabs .hero-lang-tab'));
+  if (id) {
+    const p = allProducts.find(x => x.id === id);
+    if (!p) return;
+    document.getElementById('modalTitle').textContent   = 'Редактировать товар';
+    document.getElementById('editProductId').value      = p.id;
+    document.getElementById('fName').value              = p.title;
+    document.getElementById('fDesc').value              = p.desc;
+    document.getElementById('fPrice').value             = p.price;
+    document.getElementById('fDiscount').value          = p.discount;
+    document.getElementById('fComposition').value       = p.composition || '';
+    document.getElementById('fSize').value              = p.size        || '';
+    document.getElementById('fColor').value             = p.color       || '';
+    document.getElementById('fTag').value               = p.tag         || '';
+    document.getElementById('fTagBg').value             = p.tagBg       || '';
+    document.getElementById('fSortOrder').value         = p.sort_order  || 0;
+    document.getElementById('fStatus').checked          = p.status === 1;
+    document.getElementById('fStatusLabel').textContent = p.status ? 'Активен' : 'Отключён';
+    document.getElementById('fImage1').value = p.images[0] || '';
+    document.getElementById('fImage2').value = p.images[1] || '';
+    document.getElementById('fImage3').value = p.images[2] || '';
+    previewImg(1); previewImg(2); previewImg(3);
+    // Load EN/TJ translations
+    try {
+      const tr = await apiFetch(`/api/admin/products/${id}/translations`);
+      if (tr) {
+        ['EN','TJ'].forEach(lang => {
+          const t = tr[lang];
+          if (!t) return;
+          const sfx = lang;
+          document.getElementById(`fName${sfx}`).value        = t.title        || '';
+          document.getElementById(`fDesc${sfx}`).value        = t.desc         || '';
+          document.getElementById(`fComposition${sfx}`).value = t.composition  || '';
+          document.getElementById(`fSize${sfx}`).value        = t.size         || '';
+          document.getElementById(`fColor${sfx}`).value       = t.color        || '';
+          document.getElementById(`fTag${sfx}`).value         = t.tag          || '';
+        });
+      }
+    } catch(_) {}
+  } else {
+    document.getElementById('modalTitle').textContent = 'Новый товар';
+    const maxSort = allProducts.reduce((m, p) => Math.max(m, p.sort_order), 0);
+    document.getElementById('fSortOrder').value = maxSort + 1;
+  }
+  document.getElementById('productModal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeProductModal(e) {
+  if (e && e.target !== document.getElementById('productModal')) return;
+  document.getElementById('productModal').classList.remove('open');
+  document.body.style.overflow = '';
+}
+function clearForm() {
+  ['fName','fDesc','fPrice','fComposition','fSize','fColor','fTag','fTagBg','fSortOrder','fImage1','fImage2','fImage3',
+   'fNameEN','fDescEN','fCompositionEN','fSizeEN','fColorEN','fTagEN',
+   'fNameTJ','fDescTJ','fCompositionTJ','fSizeTJ','fColorTJ','fTagTJ'
+  ].forEach(id => { const el = document.getElementById(id); if (el) el.value = ''; });
+  document.getElementById('fDiscount').value = '0';
+  document.getElementById('fStatus').checked = true;
+  document.getElementById('fStatusLabel').textContent = 'Активен';
+  document.getElementById('editProductId').value = '';
+  [1,2,3].forEach(i => {
+    const p = document.getElementById(`imgPreview${i}`);
+    if (p) p.innerHTML = `<span class="adm-img-placeholder">Фото ${i}</span>`;
+  });
+}
+async function saveProduct() {
+  const name        = document.getElementById('fName').value.trim();
+  const desc        = document.getElementById('fDesc').value.trim();
+  const composition = document.getElementById('fComposition').value.trim();
+  const size        = document.getElementById('fSize').value.trim();
+  const price       = parseFloat(document.getElementById('fPrice').value);
+  const image1      = document.getElementById('fImage1').value.trim();
+  const image2      = document.getElementById('fImage2').value.trim();
+  const image3      = document.getElementById('fImage3').value.trim();
+
+  // Validation
+  if (!name)                   { toast('Введите название товара', 'error'); return; }
+  if (!desc)                   { toast('Введите описание товара', 'error'); return; }
+  if (!composition)            { toast('Укажите состав букета', 'error'); return; }
+  if (!size)                   { toast('Укажите размер букета', 'error'); return; }
+  if (isNaN(price) || price < 0) { toast('Введите корректную цену', 'error'); return; }
+  if (!image1 && !image2 && !image3) { toast('Добавьте хотя бы одно фото', 'error'); return; }
+
+  const id = document.getElementById('editProductId').value;
+  const payload = {
+    name, price,
+    description: desc,
+    composition, size,
+    color:       document.getElementById('fColor').value.trim(),
+    discount:    parseInt(document.getElementById('fDiscount').value) || 0,
+    status:      document.getElementById('fStatus').checked ? 1 : 0,
+    tag:         document.getElementById('fTag').value.trim(),
+    tag_bg:      document.getElementById('fTagBg').value.trim() || 'var(--rose)',
+    sort_order:  parseInt(document.getElementById('fSortOrder').value) || 0,
+    image1, image2, image3,
+    currency: 'TJS'
+  };
+  const btn = document.getElementById('saveProductBtn');
+  btn.disabled = true; btn.textContent = 'Сохранение...';
+  try {
+    const r = await apiFetch(id ? `/api/admin/products/${id}` : '/api/admin/products', {
+      method: id ? 'PUT' : 'POST', body: JSON.stringify(payload)
+    });
+    if (r && r.id) {
+      // Save EN/TJ translations
+      const translations = {};
+      ['EN','TJ'].forEach(lang => {
+        const sfx = lang;
+        translations[lang] = {
+          title:       document.getElementById(`fName${sfx}`).value.trim(),
+          desc:        document.getElementById(`fDesc${sfx}`).value.trim(),
+          composition: document.getElementById(`fComposition${sfx}`).value.trim(),
+          size:        document.getElementById(`fSize${sfx}`).value.trim(),
+          color:       document.getElementById(`fColor${sfx}`).value.trim(),
+          tag:         document.getElementById(`fTag${sfx}`).value.trim()
+        };
+      });
+      await apiFetch(`/api/admin/products/${r.id}/translations`, {
+        method: 'PUT', body: JSON.stringify(translations)
+      });
+      toast(id ? 'Товар обновлён' : 'Товар добавлен', 'success');
+      closeProductModal();
+      loadProducts();
+      loadStats();
+    }
+  } finally { btn.disabled = false; btn.textContent = 'Сохранить'; }
+}
+
+// ── Delete ──
+function openDeleteModal(id, name) {
+  deleteTargetId = id;
+  document.getElementById('deleteProductName').textContent = name;
+  document.getElementById('deleteModal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeDeleteModal(e) {
+  if (e && e.target !== document.getElementById('deleteModal')) return;
+  document.getElementById('deleteModal').classList.remove('open');
+  document.body.style.overflow = '';
+  deleteTargetId = null;
+}
+async function confirmDelete() {
+  if (!deleteTargetId) return;
+  const btn = document.getElementById('confirmDeleteBtn');
+  btn.disabled = true; btn.textContent = 'Удаление...';
+  try {
+    await apiFetch(`/api/admin/products/${deleteTargetId}`, { method: 'DELETE' });
+    toast('Товар удалён', 'success');
+    closeDeleteModal();
+    loadProducts();
+    loadStats();
+  } finally { btn.disabled = false; btn.textContent = 'Удалить'; }
+}
+
+// ── Toggle status ──
+async function toggleStatus(id, checkbox) {
+  const r = await apiFetch(`/api/admin/products/${id}/toggle`, { method: 'POST' });
+  if (r && r.ok !== undefined) {
+    const row = checkbox.closest('tr');
+    const label = row.querySelector('.adm-status-label');
+    const on = r.status === 1;
+    checkbox.checked = on;
+    if (label) { label.textContent = on ? 'Активен' : 'Выкл'; label.className = `adm-status-label ${on ? 'adm-active' : 'adm-inactive'}`; }
+    row.className = on ? '' : 'adm-row-inactive';
+    toast(on ? 'Товар включён' : 'Товар отключён', 'success');
+    const p = allProducts.find(x => x.id === id);
+    if (p) p.status = r.status;
+    loadStats();
+  }
+}
+
+// ── Images ──
+function previewImg(slot) {
+  const url = document.getElementById(`fImage${slot}`).value.trim();
+  const preview = document.getElementById(`imgPreview${slot}`);
+  if (!url) { preview.innerHTML = `<span class="adm-img-placeholder">Фото ${slot}</span>`; return; }
+  preview.innerHTML = `<img src="${url}" alt="preview" onerror="this.parentElement.innerHTML='<span class=adm-img-error>Ошибка</span>'">`;
+}
+async function uploadImg(input, slot) {
+  const file = input.files[0];
+  if (!file) return;
+  const fd = new FormData(); fd.append('image', file);
+  const label = input.closest('.adm-upload-btn');
+  label.classList.add('uploading');
+  try {
+    const res  = await fetch('/api/admin/upload', { method: 'POST', body: fd });
+    const data = await res.json();
+    if (data.url) { document.getElementById(`fImage${slot}`).value = data.url; previewImg(slot); toast('Фото загружено', 'success'); }
+    else toast(data.error || 'Ошибка', 'error');
+  } catch { toast('Ошибка загрузки', 'error'); }
+  finally { label.classList.remove('uploading'); input.value = ''; }
+}
+
+// ── Misc ──
+document.getElementById('fStatus').addEventListener('change', function() {
+  document.getElementById('fStatusLabel').textContent = this.checked ? 'Активен' : 'Отключён';
+});
+
+async function adminLogout() {
+  await apiFetch('/logout', { method: 'POST' });
+  location.href = '/login.html';
+}
+
+let toastTimer;
+function toast(msg, type = 'success') {
+  const el = document.getElementById('admToast');
+  el.textContent = msg;
+  el.className = `adm-toast adm-toast-${type} visible`;
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => el.classList.remove('visible'), 3000);
+}
+
+async function apiFetch(url, opts = {}) {
+  try {
+    const defs = { headers: { 'Content-Type': 'application/json', 'X-Requested-With': 'XMLHttpRequest' } };
+    if (opts.body && typeof opts.body === 'string') opts.headers = { ...defs.headers, ...(opts.headers||{}) };
+    else opts.headers = { 'X-Requested-With': 'XMLHttpRequest', ...(opts.headers||{}) };
+    const res  = await fetch(url, { ...defs, ...opts });
+    const data = await res.json();
+    if (!res.ok) { toast(data.error || 'Ошибка', 'error'); return null; }
+    return data;
+  } catch { toast('Ошибка сети', 'error'); return null; }
+}
+
+function escHtml(str) {
+  return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+// ══════════════════════════════════════════
+//  MEDIA LIBRARY
+// ══════════════════════════════════════════
+
+let allMedia = [];
+let mediaFilter = 'all';
+
+async function loadMedia() {
+  document.getElementById('mediaGrid').innerHTML = `
+    <div class="media-loading-state">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" width="32" height="32"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+      <span>Загрузка...</span>
+    </div>`;
+  const data = await apiFetch('/api/admin/media');
+  if (!data) return;
+  allMedia = data;
+  updateMediaStats();
+  sortAndRenderMedia();
+}
+
+function updateMediaStats() {
+  const total = allMedia.length;
+  const totalSize = allMedia.reduce((s, f) => s + f.size, 0);
+  const unused = allMedia.filter(f => f.usedBy.length === 0 && f.canDelete);
+  const unusedSize = unused.reduce((s, f) => s + f.size, 0);
+
+  document.getElementById('mediaStatTotal').textContent      = total;
+  document.getElementById('mediaStatSize').textContent       = formatBytes(totalSize);
+  document.getElementById('mediaStatUnused').textContent     = unused.length;
+  document.getElementById('mediaStatUnusedSize').textContent = formatBytes(unusedSize);
+
+  const badge = document.getElementById('navMediaBadge');
+  if (unused.length > 0) {
+    badge.textContent = unused.length;
+    badge.style.display = '';
+  } else {
+    badge.style.display = 'none';
+  }
+
+  const countEl = document.getElementById('mediaUnusedCount');
+  if (countEl) countEl.textContent = unused.length > 0 ? unused.length : '';
+}
+
+function filterMedia(filter, btn) {
+  mediaFilter = filter;
+  document.querySelectorAll('.media-filter-tab').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  sortAndRenderMedia();
+}
+
+function sortAndRenderMedia() {
+  const sort = document.getElementById('mediaSortSelect').value;
+  let files = [...allMedia];
+
+  if (mediaFilter === 'used')   files = files.filter(f => f.usedBy.length > 0);
+  if (mediaFilter === 'unused') files = files.filter(f => f.usedBy.length === 0);
+
+  if (sort === 'date-desc') files.sort((a, b) => new Date(b.date) - new Date(a.date));
+  if (sort === 'date-asc')  files.sort((a, b) => new Date(a.date) - new Date(b.date));
+  if (sort === 'size-desc') files.sort((a, b) => b.size - a.size);
+  if (sort === 'size-asc')  files.sort((a, b) => a.size - b.size);
+  if (sort === 'name-asc')  files.sort((a, b) => a.filename.localeCompare(b.filename));
+
+  renderMediaGrid(files);
+}
+
+function renderMediaGrid(files) {
+  const grid = document.getElementById('mediaGrid');
+  if (!files.length) {
+    grid.innerHTML = `
+      <div class="media-empty-state">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" width="48" height="48"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+        <p>Изображений не найдено</p>
+      </div>`;
+    return;
+  }
+
+  grid.innerHTML = files.map(f => {
+    const used = f.usedBy.length > 0;
+    const dt   = new Date(f.date);
+    const date = dt.toLocaleDateString('ru-RU', { day:'2-digit', month:'2-digit', year:'2-digit' });
+    const time = dt.toLocaleTimeString('ru-RU', { hour:'2-digit', minute:'2-digit' });
+    const usedNames = f.usedBy.join(', ');
+
+    return `
+      <div class="media-card${!used && f.canDelete ? ' media-card--unused' : ''}">
+        <div class="media-card-img-wrap">
+          <img class="media-card-img" src="${escHtml(f.url)}" alt="${escHtml(f.filename)}" loading="lazy"
+               onerror="this.style.opacity='0.15'">
+          <div class="media-card-overlay">
+            <a class="media-view-btn" href="${escHtml(f.url)}" target="_blank" title="Открыть оригинал">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" width="16" height="16"><path d="M1 12S5 4 12 4s11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg>
+            </a>
+            ${f.canDelete ? `<button class="media-del-btn" onclick="deleteMediaFile('${escHtml(f.filename)}',event)" title="Удалить файл">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" width="16" height="16"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/></svg>
+            </button>` : ''}
+          </div>
+          <span class="media-badge ${used ? 'media-badge--used' : 'media-badge--unused'}">
+            ${used ? '✓ Используется' : '✗ Не используется'}
+          </span>
+        </div>
+        <div class="media-card-body">
+          <div class="media-card-name" title="${escHtml(f.filename)}">${escHtml(f.filename)}</div>
+          <div class="media-card-meta">
+            <span class="media-meta-size">${formatBytes(f.size)}</span>
+            <span class="media-meta-date" title="${date} ${time}">${date}</span>
+          </div>
+          ${used ? `<div class="media-card-used-in" title="${escHtml(usedNames)}">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" width="10" height="10"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/></svg>
+            ${escHtml(f.usedBy.slice(0,2).join(', '))}${f.usedBy.length > 2 ? ` +${f.usedBy.length - 2}` : ''}
+          </div>` : (f.canDelete ? `<div class="media-card-unused-hint">Можно удалить</div>` : '')}
+        </div>
+      </div>`;
+  }).join('');
+}
+
+async function deleteMediaFile(filename, e) {
+  e.stopPropagation();
+  if (!confirm(`Удалить «${filename}»?`)) return;
+  const r = await apiFetch(`/api/admin/media/${encodeURIComponent(filename)}`, { method: 'DELETE' });
+  if (r && r.ok) {
+    toast('Файл удалён', 'success');
+    allMedia = allMedia.filter(f => f.filename !== filename);
+    updateMediaStats();
+    sortAndRenderMedia();
+  }
+}
+
+async function deleteAllUnused() {
+  const unused = allMedia.filter(f => f.usedBy.length === 0 && f.canDelete);
+  if (!unused.length) { toast('Нет неиспользуемых файлов', 'success'); return; }
+  if (!confirm(`Удалить ${unused.length} неиспользуемых файл(а/ов)? Это действие необратимо.`)) return;
+  const btn = document.getElementById('deleteUnusedBtn');
+  btn.disabled = true; btn.textContent = 'Удаление...';
+  try {
+    const r = await apiFetch('/api/admin/media/unused', { method: 'DELETE' });
+    if (r && r.ok) {
+      toast(`Удалено: ${r.deleted} файл(а/ов)`, 'success');
+      await loadMedia();
+    }
+  } finally {
+    btn.disabled = false;
+    btn.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" width="14" height="14"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/></svg> Удалить неиспользуемые`;
+  }
+}
+
+function formatBytes(bytes) {
+  if (bytes === 0) return '0 Б';
+  if (bytes < 1024)        return bytes + ' Б';
+  if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + ' КБ';
+  return (bytes / (1024 * 1024)).toFixed(1) + ' МБ';
+}
+
+// ══════════════════════════════════════════
+//  HERO / SLIDER EDITOR
+// ══════════════════════════════════════════
+
+let heroData = { images: ['images/1.jpg','images/2.jpg','images/3.jpg','images/4.jpg'], quotes: { RU: ['','','',''], EN: ['','','',''], TJ: ['','','',''] } };
+let heroCurrentLang = 'RU';
+
+const SLIDE_LABELS = ['Слайд 1', 'Слайд 2', 'Слайд 3', 'Слайд 4'];
+const SLIDE_EMOJIS = ['🌸', '🌺', '🌹', '🌼'];
+
+async function loadHero() {
+  const data = await apiFetch('/api/hero');
+  if (data) heroData = data;
+  renderHeroSlides();
+}
+
+function switchHeroLang(lang, btn) {
+  // 1. Save current DOM values into the OLD language BEFORE switching
+  _syncHeroFromDOM();
+  // 2. Switch language
+  heroCurrentLang = lang;
+  document.querySelectorAll('.hero-lang-tab').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  // 3. Re-render with new language quotes
+  renderHeroSlides();
+}
+
+function _syncHeroFromDOM() {
+  for (let i = 0; i < 4; i++) {
+    const imgEl = document.getElementById(`hImg${i}`);
+    const txtEl = document.getElementById(`hQuote${i}`);
+    if (imgEl) heroData.images[i] = imgEl.value.trim();
+    if (txtEl) {
+      if (!heroData.quotes[heroCurrentLang]) heroData.quotes[heroCurrentLang] = ['','','',''];
+      heroData.quotes[heroCurrentLang][i] = txtEl.value;
+    }
+  }
+}
+
+function renderHeroSlides() {
+  const grid = document.getElementById('heroSlidesGrid');
+  if (!grid) return;
+
+  grid.innerHTML = SLIDE_LABELS.map((label, i) => {
+    const img   = heroData.images[i] || '';
+    const quote = (heroData.quotes[heroCurrentLang] || [])[i] || '';
+    return `
+    <div class="hero-slide-card" id="hCard${i}">
+      <div class="hero-slide-preview" id="hPreview${i}" style="${img ? `background-image:url('/${img}')` : ''}">
+        <div class="hero-slide-preview-overlay">
+          <span class="hero-slide-num">${SLIDE_EMOJIS[i]} ${label}</span>
+          ${img ? `<img class="hero-slide-preview-img" src="${escHtml(img)}" alt="">` : '<div class="hero-slide-no-img">Нет фото</div>'}
+          <div class="hero-slide-quote-preview">${escHtml(quote) || '<em>Цитата не задана</em>'}</div>
+        </div>
+      </div>
+      <div class="hero-slide-editor">
+        <div class="hero-slide-img-row">
+          <div class="hero-slide-img-label">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" width="13" height="13"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+            Фото
+          </div>
+          <input class="hero-img-input" id="hImg${i}" type="text" value="${escHtml(img)}" placeholder="images/1.jpg"
+                 oninput="heroPreviewImg(${i})">
+          <label class="adm-upload-btn hero-upload-btn" title="Загрузить фото">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" width="14" height="14"><polyline points="16 16 12 12 8 16"/><line x1="12" y1="12" x2="12" y2="21"/><path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3"/></svg>
+            <input type="file" accept="image/*" onchange="heroUploadImg(this,${i})" style="display:none">
+          </label>
+        </div>
+        <div class="hero-slide-quote-row">
+          <div class="hero-slide-img-label">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" width="13" height="13"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            Цитата <span class="hero-lang-badge">${heroCurrentLang}</span>
+          </div>
+          <textarea class="hero-quote-input" id="hQuote${i}" rows="2"
+                    placeholder="Введите цитату для слайда ${i+1}..."
+                    oninput="heroPreviewQuote(${i})">${escHtml(quote)}</textarea>
+          <div class="hero-char-count" id="hCharCount${i}">${quote.length} симв.</div>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function heroPreviewImg(i) {
+  const val = document.getElementById(`hImg${i}`).value.trim();
+  heroData.images[i] = val;
+  const preview = document.getElementById(`hPreview${i}`);
+  if (!preview) return;
+  const imgEl = preview.querySelector('.hero-slide-preview-img');
+  const noImg = preview.querySelector('.hero-slide-no-img');
+  if (val) {
+    preview.style.backgroundImage = `url('/${val}')`;
+    if (imgEl) { imgEl.src = val; }
+    else {
+      // Replace no-img div with img
+      if (noImg) noImg.outerHTML = `<img class="hero-slide-preview-img" src="${escHtml(val)}" alt="">`;
+    }
+  } else {
+    preview.style.backgroundImage = '';
+    if (imgEl) imgEl.outerHTML = '<div class="hero-slide-no-img">Нет фото</div>';
+  }
+}
+
+function heroPreviewQuote(i) {
+  const val = document.getElementById(`hQuote${i}`).value;
+  heroData.quotes[heroCurrentLang][i] = val;
+  const cc = document.getElementById(`hCharCount${i}`);
+  if (cc) cc.textContent = val.length + ' симв.';
+  const qEl = document.querySelector(`#hPreview${i} .hero-slide-quote-preview`);
+  if (qEl) qEl.innerHTML = escHtml(val) || '<em>Цитата не задана</em>';
+}
+
+async function heroUploadImg(input, i) {
+  const file = input.files[0];
+  if (!file) return;
+  const fd = new FormData(); fd.append('image', file);
+  const label = input.closest('.hero-upload-btn');
+  label.classList.add('uploading');
+  try {
+    const res  = await fetch('/api/admin/upload', { method: 'POST', body: fd });
+    const data = await res.json();
+    if (data.url) {
+      document.getElementById(`hImg${i}`).value = data.url;
+      heroPreviewImg(i);
+      toast('Фото загружено', 'success');
+    } else {
+      toast(data.error || 'Ошибка', 'error');
+    }
+  } catch { toast('Ошибка загрузки', 'error'); }
+  finally { label.classList.remove('uploading'); input.value = ''; }
+}
+
+async function saveHero() {
+  // Sync latest values from DOM
+  _syncHeroFromDOM();
+
+  const btn = document.querySelector('#page-hero .adm-btn-primary');
+  const origHtml = btn.innerHTML;
+  btn.disabled = true;
+  btn.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" width="15" height="15"><polyline points="20 6 9 17 4 12"/></svg> Сохранение...`;
+
+  try {
+    const r = await apiFetch('/api/admin/hero', {
+      method: 'PUT',
+      body: JSON.stringify({ images: heroData.images, quotes: heroData.quotes })
+    });
+    if (r && r.ok) {
+      toast('Слайдер сохранён! Изменения видны на сайте.', 'success');
+      btn.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" width="15" height="15"><polyline points="20 6 9 17 4 12"/></svg> Сохранено!`;
+      setTimeout(() => { btn.innerHTML = origHtml; btn.disabled = false; }, 2000);
+      return;
+    }
+  } catch { toast('Ошибка', 'error'); }
+  btn.disabled = false;
+  btn.innerHTML = origHtml;
+}
+
+// ══════════════════════════════════════════
+//  CHAT PAGE
+// ══════════════════════════════════════════
+
+let _chatActiveSid = null;
+let _chatPollTimer = null;
+
+function switchChatTab(tab, btn) {
+  document.querySelectorAll('.adm-chat-tab').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('chatTabConversations').style.display = tab === 'conversations' ? '' : 'none';
+  document.getElementById('chatTabTriggers').style.display      = tab === 'triggers'      ? '' : 'none';
+  document.getElementById('chatTabWidget').style.display        = tab === 'widget'        ? '' : 'none';
+  if (tab === 'triggers') loadTriggers();
+  if (tab === 'widget')   loadWidgetSettings();
+}
+
+// ── Widget settings ──
+async function loadWidgetSettings() {
+  try {
+    const s = await fetch('/api/admin/site-settings', { credentials: 'same-origin' }).then(r => r.json());
+    document.getElementById('widgetChatEnabled').checked = s.chat_enabled !== '0';
+    const corner = s.widget_corner || 'br';
+    document.querySelectorAll('.adm-pos-btn').forEach(b => {
+      b.classList.toggle('active', b.dataset.corner === corner);
+    });
+  } catch(_) {}
+}
+
+async function saveWidgetSettings() {
+  const enabled = document.getElementById('widgetChatEnabled').checked ? '1' : '0';
+  const corner  = document.querySelector('.adm-pos-btn.active')?.dataset.corner || 'br';
+  try {
+    await fetch('/api/admin/site-settings', {
+      method: 'POST', credentials: 'same-origin',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ chat_enabled: enabled, widget_corner: corner })
+    });
+    const msg = document.getElementById('widgetSavedMsg');
+    msg.style.display = 'inline';
+    setTimeout(() => { msg.style.display = 'none'; }, 2000);
+  } catch(_) {}
+}
+
+function setWidgetCorner(corner, btn) {
+  document.querySelectorAll('.adm-pos-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  saveWidgetSettings();
+}
+
+// ── Sessions ──
+async function loadChatSessions() {
+  const res = await fetch('/api/admin/chat/sessions', { credentials: 'same-origin' });
+  const sessions = await res.json();
+  const list = document.getElementById('chatSessionsList');
+
+  // Update nav badge
+  const totalUnread = sessions.reduce((s, x) => s + (x.unread || 0), 0);
+  const navBadge = document.getElementById('navChatBadge');
+  navBadge.textContent = totalUnread;
+  navBadge.style.display = totalUnread > 0 ? '' : 'none';
+
+  if (!sessions.length) {
+    list.innerHTML = '<div class="adm-chat-sessions-empty">Нет сообщений</div>';
+    return;
+  }
+  list.innerHTML = sessions.map(s => {
+    const time    = new Date(s.last_msg + ' UTC').toLocaleTimeString('tg', { hour:'2-digit', minute:'2-digit', timeZone:'Asia/Dushanbe' });
+    const unread  = s.unread > 0 ? `<span class="adm-chat-unread">${s.unread}</span>` : '';
+    const preview = (s.last_text || '…').slice(0, 40);
+    const shortId = s.id.slice(-6);
+    const label   = s.user_name ? s.user_name : `Меҳмон #${shortId}`;
+    const initials= s.user_name ? s.user_name.slice(0,2).toUpperCase() : shortId.slice(0,2).toUpperCase();
+    const active  = s.id === _chatActiveSid ? ' active' : '';
+    return `<div class="adm-chat-session-item${active}" data-sid="${s.id}" onclick="openChatSession('${s.id}')">
+      <div class="adm-chat-session-avatar">${initials}</div>
+      <div class="adm-chat-session-info">
+        <div class="adm-chat-session-name">${label} ${unread}</div>
+        <div class="adm-chat-session-preview">${preview}</div>
+      </div>
+      <div class="adm-chat-session-time">${time}</div>
+    </div>`;
+  }).join('');
+}
+
+async function openChatSession(sid) {
+  _chatActiveSid = sid;
+  document.querySelectorAll('.adm-chat-session-item').forEach(el => el.classList.remove('active'));
+  document.querySelector(`.adm-chat-session-item[onclick*="${sid}"]`)?.classList.add('active');
+
+  const msgs = await fetch(`/api/admin/chat/session/${sid}`, { credentials: 'same-origin' }).then(r => r.json());
+  _admLastMsgCount[sid] = msgs.length;
+  const panel = document.getElementById('chatConvPanel');
+  panel.innerHTML = `
+    <div class="adm-chat-messages" id="admChatMsgs">
+      ${msgs.map(m => _chatMsgHtml(m)).join('')}
+    </div>
+    <div class="adm-chat-reply-row">
+      <textarea class="adm-chat-input" id="admChatInput" placeholder="Ответить клиенту…" rows="1"
+        onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendChatReply()}"
+        oninput="this.style.height='auto';this.style.height=Math.min(this.scrollHeight,120)+'px'"></textarea>
+      <button class="adm-chat-send-btn" onclick="sendChatReply()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" width="18" height="18"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+      </button>
+    </div>`;
+  const msgEl = document.getElementById('admChatMsgs');
+  msgEl.scrollTop = msgEl.scrollHeight;
+  document.getElementById('admChatInput').focus();
+
+  // Reload sessions to clear unread
+  loadChatSessions();
+}
+
+function _chatMsgHtml(m) {
+  const time = new Date(m.created_at + ' UTC').toLocaleTimeString('tg', { hour:'2-digit', minute:'2-digit', timeZone:'Asia/Dushanbe' });
+  const dir  = m.dir === 'in' ? 'adm-chat-msg-in' : 'adm-chat-msg-out';
+  const lbl  = m.dir === 'in' ? 'Клиент' : 'Вы';
+  const tick = m.dir === 'out'
+    ? `<span class="adm-msg-tick ${m.read_at ? 'adm-tick-read' : 'adm-tick-sent'}" title="${m.read_at ? 'Прочитано' : 'Доставлено'}">${m.read_at ? '✓✓' : '✓'}</span>`
+    : '';
+  return `<div class="adm-chat-msg ${dir}" data-msg-id="${m.id}">
+    <div class="adm-chat-msg-bubble">${m.text || ''}</div>
+    <div class="adm-chat-msg-meta">${lbl} · ${time} ${tick}</div>
+  </div>`;
+}
+
+async function sendChatReply() {
+  const inp  = document.getElementById('admChatInput');
+  const text = inp.value.trim();
+  if (!text || !_chatActiveSid) return;
+  inp.value = ''; inp.style.height = 'auto';
+  const resp = await fetch('/api/admin/chat/reply', {
+    method: 'POST', credentials: 'same-origin',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ session_id: _chatActiveSid, text })
+  }).then(r => r.json()).catch(() => ({}));
+
+  // Add message to DOM immediately
+  const msgEl = document.getElementById('admChatMsgs');
+  if (msgEl) {
+    const now = new Date().toLocaleTimeString('tg', { hour:'2-digit', minute:'2-digit', timeZone:'Asia/Dushanbe' });
+    const div = document.createElement('div');
+    div.className = 'adm-chat-msg adm-chat-msg-out';
+    div.dataset.msgId = resp.msg_id || '';
+    div.innerHTML = `<div class="adm-chat-msg-bubble">${text}</div><div class="adm-chat-msg-meta">Вы · ${now} <span class="adm-msg-tick adm-tick-sent" title="Доставлено">✓</span></div>`;
+    msgEl.appendChild(div);
+    msgEl.scrollTop = msgEl.scrollHeight;
+    // Update msg count so poller doesn't re-fetch unnecessarily
+    _admLastMsgCount[_chatActiveSid] = (_admLastMsgCount[_chatActiveSid] || 0) + 1;
+  }
+}
+
+let _admLastMsgCount = {}; // { sessionId: lastKnownMsgCount }
+
+// Poll for new messages in active session
+function _startAdminChatPoll() {
+  if (_chatPollTimer) return;
+  _chatPollTimer = setInterval(async () => {
+    try {
+      // Always update sessions list (nav badge + sidebar)
+      const sessions = await fetch('/api/admin/chat/sessions', { credentials: 'same-origin' }).then(r => r.json()).catch(() => []);
+      const totalUnread = sessions.reduce((s, x) => s + (x.unread || 0), 0);
+      const navBadge = document.getElementById('navChatBadge');
+      if (navBadge) { navBadge.textContent = totalUnread; navBadge.style.display = totalUnread > 0 ? '' : 'none'; }
+
+      const chatPage = document.getElementById('page-chat');
+      if (!chatPage || !chatPage.classList.contains('active')) return;
+
+      // Rebuild session list if counts changed
+      const listEl = document.getElementById('chatSessionsList');
+      if (listEl) {
+        sessions.forEach(s => {
+          const item = listEl.querySelector(`.adm-chat-session-item[data-sid="${s.id}"]`);
+          if (!item) {
+            // New session appeared — reload full list
+            loadChatSessions();
+            return;
+          }
+          const unreadEl = item.querySelector('.adm-chat-unread');
+          if (s.unread > 0) {
+            if (unreadEl) unreadEl.textContent = s.unread;
+            else item.querySelector('.adm-chat-session-name').insertAdjacentHTML('beforeend', `<span class="adm-chat-unread">${s.unread}</span>`);
+            item.querySelector('.adm-chat-session-preview').textContent = (s.last_text || '…').slice(0, 40);
+          } else if (unreadEl) unreadEl.remove();
+        });
+      }
+
+      // If a conversation is open — reload it when new messages arrive
+      if (_chatActiveSid) {
+        const thisSess = sessions.find(s => s.id === _chatActiveSid);
+        const newCount = thisSess ? thisSess.msg_count : 0;
+        const known    = _admLastMsgCount[_chatActiveSid] || 0;
+        if (newCount > known) {
+          _admLastMsgCount[_chatActiveSid] = newCount;
+          // Reload conversation (append new messages)
+          const msgs = await fetch(`/api/admin/chat/session/${_chatActiveSid}`, { credentials: 'same-origin' }).then(r => r.json()).catch(() => null);
+          if (msgs) _refreshAdmConversation(msgs);
+        } else {
+          // Check ✓ → ✓✓ read receipts without full reload
+          const sentPending = document.querySelectorAll('#admChatMsgs .adm-msg-tick.adm-tick-sent');
+          if (sentPending.length) {
+            const msgs = await fetch(`/api/admin/chat/session/${_chatActiveSid}`, { credentials: 'same-origin' }).then(r => r.json()).catch(() => []);
+            msgs.forEach(m => {
+              if (m.dir === 'out' && m.read_at) {
+                const el = document.querySelector(`#admChatMsgs [data-msg-id="${m.id}"] .adm-msg-tick`);
+                if (el && el.classList.contains('adm-tick-sent')) {
+                  el.textContent = '✓✓';
+                  el.classList.replace('adm-tick-sent', 'adm-tick-read');
+                  el.title = 'Прочитано';
+                }
+              }
+            });
+          }
+        }
+      }
+    } catch(_) {}
+  }, 2500);
+}
+
+function _refreshAdmConversation(msgs) {
+  const msgEl = document.getElementById('admChatMsgs');
+  if (!msgEl) return;
+  const scrolledToBottom = msgEl.scrollHeight - msgEl.scrollTop - msgEl.clientHeight < 60;
+  msgEl.innerHTML = msgs.map(m => _chatMsgHtml(m)).join('');
+  if (scrolledToBottom) msgEl.scrollTop = msgEl.scrollHeight;
+}
+
+// ── Triggers ──
+async function loadTriggers() {
+  const triggers = await fetch('/api/admin/chat/triggers', { credentials: 'same-origin' }).then(r => r.json());
+  const list = document.getElementById('triggersList');
+  if (!triggers.length) { list.innerHTML = '<div style="color:var(--adm-text-muted);padding:24px">Нет триггеров</div>'; return; }
+  list.innerHTML = triggers.map(tr => `
+    <div class="adm-trigger-card" id="trigger-${tr.id}">
+      <div class="adm-trigger-header">
+        <div class="adm-trigger-keywords">
+          ${tr.keywords.split(',').map(k => `<span class="adm-trigger-kw">${k.trim()}</span>`).join('')}
+        </div>
+        <div class="adm-trigger-actions">
+          <label class="adm-trigger-toggle" title="${tr.active ? 'Отключить' : 'Включить'}">
+            <input type="checkbox" ${tr.active ? 'checked' : ''} onchange="toggleTrigger(${tr.id},this.checked)">
+            <span class="adm-toggle-slider"></span>
+          </label>
+          <button class="adm-trigger-edit-btn" onclick="openTriggerModal(${tr.id},'${encodeURIComponent(tr.keywords)}','${encodeURIComponent(tr.reply)}')">✏️</button>
+          <button class="adm-trigger-del-btn" onclick="deleteTrigger(${tr.id})">🗑</button>
+        </div>
+      </div>
+      <div class="adm-trigger-reply">${tr.reply}</div>
+    </div>`).join('');
+}
+
+let _editTriggerId = null;
+function openTriggerModal(id, kw, reply) {
+  _editTriggerId = id || null;
+  const existing = document.getElementById('triggerModal');
+  if (existing) existing.remove();
+  const modal = document.createElement('div');
+  modal.id = 'triggerModal';
+  modal.className = 'adm-modal-overlay';
+  modal.innerHTML = `
+    <div class="adm-modal" style="max-width:520px">
+      <div class="adm-modal-header">
+        <h3>${id ? 'Редактировать' : 'Новый'} триггер</h3>
+        <button class="adm-modal-close" onclick="document.getElementById('triggerModal').remove()">×</button>
+      </div>
+      <div class="adm-modal-body">
+        <label class="adm-field-label">Ключевые слова <small>(через запятую)</small></label>
+        <input class="adm-input" id="triggerKwInput" value="${kw ? decodeURIComponent(kw) : ''}" placeholder="доставка, привезти, когда">
+        <label class="adm-field-label" style="margin-top:14px">Ответ бота</label>
+        <textarea class="adm-textarea" id="triggerReplyInput" rows="4" placeholder="Текст ответа…">${reply ? decodeURIComponent(reply) : ''}</textarea>
+      </div>
+      <div class="adm-modal-footer">
+        <button class="adm-btn" onclick="document.getElementById('triggerModal').remove()">Отмена</button>
+        <button class="adm-btn adm-btn-primary" onclick="saveTrigger()">Сохранить</button>
+      </div>
+    </div>`;
+  document.body.appendChild(modal);
+  modal.querySelector('#triggerKwInput').focus();
+}
+
+async function saveTrigger() {
+  const kw    = document.getElementById('triggerKwInput').value.trim();
+  const reply = document.getElementById('triggerReplyInput').value.trim();
+  if (!kw || !reply) { alert('Заполните оба поля'); return; }
+  if (_editTriggerId) {
+    await fetch(`/api/admin/chat/triggers/${_editTriggerId}`, {
+      method: 'PUT', credentials: 'same-origin',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ keywords: kw, reply, active: 1 })
+    });
+  } else {
+    await fetch('/api/admin/chat/triggers', {
+      method: 'POST', credentials: 'same-origin',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ keywords: kw, reply })
+    });
+  }
+  document.getElementById('triggerModal').remove();
+  loadTriggers();
+}
+
+async function toggleTrigger(id, active) {
+  const card = document.getElementById(`trigger-${id}`);
+  const kw    = card.querySelector('.adm-trigger-keywords').textContent.trim().replace(/\s+/g, ',');
+  const reply = card.querySelector('.adm-trigger-reply').textContent;
+  await fetch(`/api/admin/chat/triggers/${id}`, {
+    method: 'PUT', credentials: 'same-origin',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ keywords: kw, reply, active })
+  });
+}
+
+async function deleteTrigger(id) {
+  if (!confirm('Удалить этот триггер?')) return;
+  await fetch(`/api/admin/chat/triggers/${id}`, { method: 'DELETE', credentials: 'same-origin' });
+  loadTriggers();
+}
+
+// Hook into showPage
+const _origShowPage = showPage;
+window.showPage = function(page) {
+  _origShowPage(page);
+  if (page === 'chat') {
+    loadChatSessions();
+  }
+};
+
+// Start polling on load (for badge in nav)
+_startAdminChatPoll();
+</script>
+</body>
+</html>
